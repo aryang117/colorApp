@@ -23,18 +23,13 @@ ValueNotifier<int> blue = ValueNotifier<int>(0);
 class MyHomePage extends StatefulWidget {
   @override
   _MyHomePageState createState() => _MyHomePageState();
-  // ValueNotifier<int> red = ValueNotifier<int>(0);
-  // ValueNotifier<int> green = ValueNotifier<int>(0);
-  // ValueNotifier<int> blue = ValueNotifier<int>(0);
+ 
 }
 
 class _MyHomePageState extends State<MyHomePage> {
   int i = 0;
   int abc = 0xff212121;
-  // ValueNotifier<int> red = ValueNotifier<int>(0);
-  // ValueNotifier<int> green = ValueNotifier<int>(0);
-  // ValueNotifier<int> blue = ValueNotifier<int>(0);
-
+  
   @override
   Widget build(BuildContext context) {
     double screenheight = MediaQuery.of(context).size.height;
@@ -46,63 +41,49 @@ class _MyHomePageState extends State<MyHomePage> {
 
     return Scaffold(
       backgroundColor: Color(abc),
-      body: SingleChildScrollView(
-        child: Column(children: <Widget>[
-          Container(
-            padding: new EdgeInsets.fromLTRB(0, screenheight * 0.05, 0, 0),
-            child: Text(
-              "Color",
-              style: new TextStyle(
-                  color: Colors.white,
-                  fontSize: Theme.of(context).textTheme.headline3.fontSize),
-            ),
+      body: Column(children: <Widget>[
+        Container(
+          padding: new EdgeInsets.fromLTRB(0, screenheight * 0.05, 0, 0),
+          child: Text(
+            "Color",
+            style: new TextStyle(
+                color: Colors.white,
+                fontSize: Theme.of(context).textTheme.headline4.fontSize),
           ),
-          Padding(
-            padding: new EdgeInsets.fromLTRB(10, 10, 10, 0),
-            child: Align(
-              alignment: Alignment.topCenter,
-              child: Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                color: Color.fromRGBO(red.value, green.value, blue.value, 1),
-                child: Stack(
-                  children: <Widget>[
-                    Container(
-                      height: 0.66 * screenheight,
-                      width: MediaQuery.of(context).size.width,
-                    ),
-                    ColorSliders(),
-                  ],
-                ),
+        ),
+        Padding(
+          padding: new EdgeInsets.fromLTRB(10, 10, 10, 0),
+          child: Align(
+            alignment: Alignment.topCenter,
+            child: Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5),
+              ),
+              color: Color.fromRGBO(red.value, green.value, blue.value, 1),
+              child: Stack(
+                children: <Widget>[
+                  Container(
+                    height: 0.66 * screenheight,
+                    width: MediaQuery.of(context).size.width,
+                  ),
+                  ColorSliders(),
+                ],
               ),
             ),
           ),
-          //Expanded(
-          //child:
-          // GridView.count(
-          //     crossAxisCount: 4,
-          //     children: List.generate(i, (index) {
-          //       return Container(
-          //         child: Text(
-          //           'lorem ipsum dolor',
-          //           style: new TextStyle(color: Color(abc)),
-          //         ),
-          //       );
-          //     })),
-          // //     ),
-          Container(
-            width: MediaQuery.of(context).size.width - 50,
-            padding: new EdgeInsets.fromLTRB(0, 20, 0, 20),
-            child: GridView.count(
-                shrinkWrap: true, //made the grid list work inside column
-                crossAxisCount: 4,
-                children: List.generate(i, (index) {
-                  return ColorBox();
-                })),
-          ),
-        ]),
-      ),
+        ),
+        
+        Container(
+          width: MediaQuery.of(context).size.width - 50,
+          padding: new EdgeInsets.fromLTRB(0, 20, 0, 20),
+          child: GridView.count(
+              shrinkWrap: true, //made the grid list work inside column
+              crossAxisCount: 4,
+              children: List.generate(i, (index) {
+                return ColorBox();
+              })),
+        ),
+      ]),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           setState(() {
@@ -133,17 +114,10 @@ class ColorBox extends StatelessWidget {
 }
 
 class ColorSliders extends StatefulWidget {
-  // ColorSliders({
-  //   Key key,
-  //   @required this.red,
-  //   @required this.green,
-  //   @required this.blue,
-  // }) : super(key: key);
+  
   @override
   _ColorSlidersState createState() => _ColorSlidersState();
-  // ValueNotifier<int> red = ValueNotifier<int>(0);
-  // ValueNotifier<int> green = ValueNotifier<int>(0);
-  // ValueNotifier<int> blue = ValueNotifier<int>(0);
+  
 }
 
 class _ColorSlidersState extends State<ColorSliders> {
@@ -155,11 +129,7 @@ class _ColorSlidersState extends State<ColorSliders> {
       left: 0,
       child: Column(
         children: <Widget>[
-          Container(
-            color: Colors.blue,
-            height: 50,
-            width: 50,
-          ),
+         
           Slider(
             label: red.value.toString(),
             value: red.value.toDouble(),
