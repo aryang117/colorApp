@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:colorApp/Widgets/colorSaveBoxes.dart';
 import 'package:colorApp/Widgets/ColorDisplay.dart';
 import 'package:colorApp/Widgets/colorCodeDisplay.dart';
+import 'package:colorApp/Widgets/colorSlider.dart';
 
 ValueNotifier<int> red = ValueNotifier<int>(0);
 ValueNotifier<int> green = ValueNotifier<int>(0);
@@ -51,17 +52,8 @@ class _HomeState extends State<Home> {
                             ),
                           ),
                           ColorDisplay(red: red, blue: blue, green: green),
-                          Container(
-                            width: MediaQuery.of(context).size.width - 50,
-                            padding: new EdgeInsets.fromLTRB(0, 20, 0, 20),
-                            child: GridView.count(
-                                shrinkWrap:
-                                    true, //made the grid list work inside column
-                                crossAxisCount: 4,
-                                children: List.generate(i, (index) {
-                                  return ColorSaveBoxes();
-                                })),
-                          ),
+                          ColorSliders(),
+                         ColorSaveBoxesList(i: i)
                         ]),
                         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
                         floatingActionButton: FloatingActionButton.extended(
