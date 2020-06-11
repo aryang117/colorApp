@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.blueGrey[50],
       ),
-      home: MyHomePage(),
+      home: Home(),
     );
   }
 }
@@ -19,21 +19,21 @@ ValueNotifier<int> red = ValueNotifier<int>(0);
 ValueNotifier<int> green = ValueNotifier<int>(0);
 ValueNotifier<int> blue = ValueNotifier<int>(0);
 
-class MyHomePage extends StatefulWidget {
+class Home extends StatefulWidget {
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _HomeState createState() => _HomeState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _HomeState extends State<Home> {
   int i = 0;
   int abc = 0xff212121;
 
   @override
   Widget build(BuildContext context) {
     double screenheight = MediaQuery.of(context).size.height;
-    int somenumber() {
+    int colorBoxNumbers() {
       i++;
-      if (i > 7) i = 7;
+      if (i > 4) i = 4;
       return i;
     }
 
@@ -95,14 +95,14 @@ class _MyHomePageState extends State<MyHomePage> {
                                     true, //made the grid list work inside column
                                 crossAxisCount: 4,
                                 children: List.generate(i, (index) {
-                                  return ColorBox();
+                                  return ColorSaveBoxes();
                                 })),
                           ),
                         ]),
                         floatingActionButton: FloatingActionButton(
                           onPressed: () {
                             setState(() {
-                              somenumber();
+                              colorBoxNumbers();
                             });
                           },
                           tooltip: 'Increment',
@@ -115,7 +115,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-class ColorBox extends StatelessWidget {
+class ColorSaveBoxes extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
