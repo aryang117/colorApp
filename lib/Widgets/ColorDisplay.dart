@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:colorApp/Screens/home.dart';
 import 'colorSlider.dart';
 
 //This displays the Color that the users chooses by adjusting the sliders

@@ -1,9 +1,8 @@
-import 'package:colorApp/Widgets/ColorDisplay.dart';
-import 'package:colorApp/Widgets/colorCodeDisplay.dart';
 import 'package:flutter/material.dart';
 
-import 'package:colorApp/Widgets/colorSlider.dart';
 import 'package:colorApp/Widgets/colorSaveBoxes.dart';
+import 'package:colorApp/Widgets/ColorDisplay.dart';
+import 'package:colorApp/Widgets/colorCodeDisplay.dart';
 
 ValueNotifier<int> red = ValueNotifier<int>(0);
 ValueNotifier<int> green = ValueNotifier<int>(0);
