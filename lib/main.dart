@@ -31,7 +31,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     double screenheight = MediaQuery.of(context).size.height;
-    int colorBoxNumber() {
+    int colorBoxNumbers() {
       i++;
       if (i > 4) i = 4;
       return i;
@@ -102,7 +102,7 @@ class _HomeState extends State<Home> {
                         floatingActionButton: FloatingActionButton(
                           onPressed: () {
                             setState(() {
-                              colorBoxNumber();
+                              colorBoxNumbers();
                             });
                           },
                           tooltip: 'Increment',
