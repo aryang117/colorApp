@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'colorSlider.dart';
-
 //This displays the Color that the users chooses by adjusting the sliders
 class ColorDisplay extends StatelessWidget {
   const ColorDisplay(
@@ -24,16 +22,9 @@ class ColorDisplay extends StatelessWidget {
             borderRadius: BorderRadius.circular(5),
           ),
           color: Color.fromRGBO(red, green, blue, 1),
-
-          // The Sliders are stacked on top of the ColorDisplay
-          child: Stack(
-            children: <Widget>[
-              Container(
-                height: 0.5 * screenHeight,
-                width: MediaQuery.of(context).size.width,
-              ),
-              ColorSliders(),
-            ],
+          child: Container(
+            height: 0.5 * screenHeight,
+            width: MediaQuery.of(context).size.width,
           ),
         ),
       ),
