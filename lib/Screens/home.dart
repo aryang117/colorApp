@@ -9,6 +9,9 @@ ValueNotifier<int> red = ValueNotifier<int>(0);
 ValueNotifier<int> green = ValueNotifier<int>(0);
 ValueNotifier<int> blue = ValueNotifier<int>(0);
 
+//TODO: SaveBoxes should now appear in a modal sheet
+//TODO: Add Text Labels for the sliders so that user can know what values of RGB they're currently at
+
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
@@ -25,6 +28,22 @@ class _HomeState extends State<Home> {
       i++;
       if (i > 4) i = 4;
       return i;
+    }
+
+    void _onFABPressed() {
+      showModalBottomSheet(
+        context: context,
+        builder: (context) {
+          return Container(
+              color: Color(0xff212121),
+              padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
+              child: ColorSaveBoxesList(i: i));
+        },
+      );
+
+      setState(() {
+        colorBoxNumbers();
+      });
     }
 
     return ValueListenableBuilder(
@@ -53,16 +72,12 @@ class _HomeState extends State<Home> {
                           ),
                           ColorDisplay(red: red, blue: blue, green: green),
                           ColorSliders(),
-                         ColorSaveBoxesList(i: i)
                         ]),
-                        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+                        floatingActionButtonLocation:
+                            FloatingActionButtonLocation.centerFloat,
                         floatingActionButton: FloatingActionButton.extended(
                           label: Text('+ Save'),
-                          onPressed: () {
-                            setState(() {
-                              colorBoxNumbers();
-                            });
-                          },
+                          onPressed: () => _onFABPressed(),
                           tooltip: 'Add Save Box',
                           // child: Icon(Icons.add),
                         ),
