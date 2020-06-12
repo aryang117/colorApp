@@ -9,8 +9,8 @@ ValueNotifier<int> red = ValueNotifier<int>(0);
 ValueNotifier<int> green = ValueNotifier<int>(0);
 ValueNotifier<int> blue = ValueNotifier<int>(0);
 
-//TODO: SaveBoxes should now appear in a modal sheet
-//TODO: Add Text Labels for the sliders so that user can know what values of RGB they're currently at
+//TODO: SaveBoxes should now appear in a modal sheet - done
+
 
 class Home extends StatefulWidget {
   @override
@@ -74,7 +74,7 @@ class _HomeState extends State<Home> {
                           ColorSliders(),
                         ]),
                         floatingActionButtonLocation:
-                            FloatingActionButtonLocation.centerFloat,
+                            FloatingActionButtonLocation.centerDocked,
                         floatingActionButton: FloatingActionButton.extended(
                           label: Text('+ Save'),
                           onPressed: () => _onFABPressed(),
