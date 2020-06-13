@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 import 'package:colorApp/Widgets/colorSaveBoxes.dart';
@@ -71,7 +73,20 @@ class _HomeState extends State<Home> {
                           label: Text('+ Save'),
                           onPressed: () => _onFABPressed(),
                           tooltip: 'Add Save Box',
-                          // child: Icon(Icons.add),
+                        ),
+                        bottomNavigationBar: BottomNavigationBar(
+                          elevation: 8,
+                          backgroundColor: Color(0xff323232),
+                          items: [
+                            BottomNavigationBarItem(
+                              icon: Icon(Icons.crop_square),
+                              title: Text('hehe'),
+                            ),
+                            BottomNavigationBarItem(
+                              icon: Icon(Icons.gradient),
+                              title: Text('hehe'),
+                            ),
+                          ],
                         ),
                       );
                     });
