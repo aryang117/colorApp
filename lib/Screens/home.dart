@@ -11,7 +11,6 @@ ValueNotifier<int> blue = ValueNotifier<int>(0);
 
 //TODO: SaveBoxes should now appear in a modal sheet - done
 
-
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
@@ -60,19 +59,21 @@ class _HomeState extends State<Home> {
                     builder: (context, int red, child) {
                       return Scaffold(
                         backgroundColor: Color(abc),
-                        body: Column(children: <Widget>[
-                          Container(
-                            padding: new EdgeInsets.fromLTRB(
-                                0, screenheight * 0.05, 0, 0),
-                            child: ColorCode(
-                              red: red,
-                              green: green,
-                              blue: blue,
+                        body: SingleChildScrollView(
+                          child: Column(children: <Widget>[
+                            Container(
+                              padding: new EdgeInsets.fromLTRB(
+                                  0, screenheight * 0.05, 0, 0),
+                              child: ColorCode(
+                                red: red,
+                                green: green,
+                                blue: blue,
+                              ),
                             ),
-                          ),
-                          ColorDisplay(red: red, blue: blue, green: green),
-                          ColorSliders(),
-                        ]),
+                            ColorDisplay(red: red, blue: blue, green: green),
+                            ColorSliders(),
+                          ]),
+                        ),
                         floatingActionButtonLocation:
                             FloatingActionButtonLocation.centerDocked,
                         floatingActionButton: FloatingActionButton.extended(
