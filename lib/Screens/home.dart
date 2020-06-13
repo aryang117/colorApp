@@ -23,11 +23,6 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     double screenheight = MediaQuery.of(context).size.height;
-    int colorBoxNumbers() {
-      i++;
-      if (i > 4) i = 4;
-      return i;
-    }
 
     void _onFABPressed() {
       showModalBottomSheet(
@@ -36,13 +31,9 @@ class _HomeState extends State<Home> {
           return Container(
               color: Color(0xff212121),
               padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
-              child: ColorSaveBoxesList(i: i));
+              child: ColorSaveBoxesList(i: 4));
         },
       );
-
-      setState(() {
-        colorBoxNumbers();
-      });
     }
 
     return ValueListenableBuilder(
