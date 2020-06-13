@@ -2,10 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:colorApp/Screens/home.dart';
 
-//TODO: Add Text Labels for the sliders so that user can know what values of RGB they're currently at - done
-
-//TODO: fix the labelTextString so that their cursors aren't at the start but are at the end 
-
 TextStyle formStyle = new TextStyle(fontSize: 20, color: Colors.white);
 
 //These are the sliders that allow the user to change colors
@@ -85,8 +81,6 @@ class _SlidersState extends State<Sliders> {
   }
 }
 
-final TextEditingController _controller = TextEditingController(text: '');
-
 class SliderTextLabel extends StatelessWidget {
   const SliderTextLabel(
       {Key key, @required this.labelTextString, @required this.sliderValue})
@@ -95,6 +89,13 @@ class SliderTextLabel extends StatelessWidget {
   final int sliderValue;
   @override
   Widget build(BuildContext context) {
+    final TextEditingController _controller = TextEditingController(
+      text: sliderValue.toString(),
+    );
+    _controller.value = _controller.value.copyWith(
+        text: sliderValue.toString(),
+        selection:
+            TextSelection.collapsed(offset: sliderValue.toString().length));
     return Row(
       children: [
         Container(
@@ -112,9 +113,7 @@ class SliderTextLabel extends StatelessWidget {
             textAlignVertical: TextAlignVertical.center,
             style: formStyle,
             keyboardType: TextInputType.number,
-            controller: TextEditingController(
-              text: sliderValue.toString(),
-            ),
+            controller: _controller,
             decoration: InputDecoration.collapsed(
               hintText: '',
               hintStyle: formStyle,
