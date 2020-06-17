@@ -1,17 +1,10 @@
-import 'dart:math';
-
+import 'package:colorApp/Screens/solidColor.dart';
 import 'package:flutter/material.dart';
 
-import 'package:colorApp/Widgets/colorSaveBoxes.dart';
-import 'package:colorApp/Widgets/ColorDisplay.dart';
-import 'package:colorApp/Widgets/colorCodeDisplay.dart';
-import 'package:colorApp/Widgets/colorSlider.dart';
-
-ValueNotifier<int> red = ValueNotifier<int>(0);
-ValueNotifier<int> green = ValueNotifier<int>(0);
-ValueNotifier<int> blue = ValueNotifier<int>(0);
-
-//TODO: SaveBoxes should now appear in a modal sheet - done
+import 'package:persistent_bottom_nav_bar/models/persisten-bottom-nav-item.widget.dart';
+import 'package:persistent_bottom_nav_bar/models/persistent-bottom-nav-bar-styles.widget.dart';
+import 'package:persistent_bottom_nav_bar/models/persistent-nav-bar-scaffold.widget.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.widget.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -22,75 +15,74 @@ class _HomeState extends State<Home> {
   int i = 0;
   int abc = 0xff212121;
 
+  PersistentTabController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = PersistentTabController(initialIndex: 0);
+  }
+
+  List<Widget> _buildScreens() {
+    return [
+      SolidColor(),
+      SolidColor(),
+      SolidColor(),
+      SolidColor(),
+    ];
+  }
+
+  List<PersistentBottomNavBarItem> _navBarsItems() {
+    return [
+      PersistentBottomNavBarItem(
+        icon: Icon(Icons.check_box_outline_blank),
+        title: ("Solid"),
+        activeColor: Colors.white,
+        inactiveColor: Colors.grey,
+        isTranslucent: false,
+      ),
+      PersistentBottomNavBarItem(
+        icon: Icon(Icons.gradient),
+        title: ("Gradient"),
+        activeColor: Colors.white,
+        inactiveColor: Colors.grey,
+        isTranslucent: false,
+      ),
+      PersistentBottomNavBarItem(
+        icon: Icon(Icons.message),
+        title: ("UI"),
+        activeColor: Colors.white,
+        inactiveColor: Colors.grey,
+        isTranslucent: false,
+      ),
+      PersistentBottomNavBarItem(
+        icon: Icon(Icons.settings),
+        title: ("Settings"),
+        activeColor: Colors.white,
+        inactiveColor: Colors.grey,
+        isTranslucent: false,
+      ),
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
-    double screenheight = MediaQuery.of(context).size.height;
-
-    void _onFABPressed() {
-      showModalBottomSheet(
-        context: context,
-        builder: (context) {
-          return Container(
-              color: Color(0xff212121),
-              padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
-              child: ColorSaveBoxesList(i: 4));
+    return PersistentTabView(
+        controller: _controller,
+        screens: _buildScreens(),
+        items:
+            _navBarsItems(), // Redundant here but defined to demonstrate for other than custom style
+        confineInSafeArea: true,
+        showElevation: true,
+        backgroundColor: Color(0xff282828),
+        handleAndroidBackButtonPress: true,
+        onItemSelected: (int) {
+          setState(
+              () {}); // This is required to update the nav bar if Android back button is pressed
         },
-      );
-    }
-
-    return ValueListenableBuilder(
-        valueListenable: green,
-        child: null,
-        builder: (context, int green, child) {
-          return ValueListenableBuilder(
-              valueListenable: blue,
-              child: null,
-              builder: (context, int blue, child) {
-                return ValueListenableBuilder(
-                    valueListenable: red,
-                    child: null,
-                    builder: (context, int red, child) {
-                      return Scaffold(
-                        backgroundColor: Color(abc),
-                        body: SingleChildScrollView(
-                          child: Column(children: <Widget>[
-                            Container(
-                              padding: new EdgeInsets.fromLTRB(
-                                  0, screenheight * 0.05, 0, 0),
-                              child: ColorCode(
-                                red: red,
-                                green: green,
-                                blue: blue,
-                              ),
-                            ),
-                            ColorDisplay(red: red, blue: blue, green: green),
-                            ColorSliders(),
-                          ]),
-                        ),
-                        floatingActionButtonLocation:
-                            FloatingActionButtonLocation.centerDocked,
-                        floatingActionButton: FloatingActionButton.extended(
-                          label: Text('+ Save'),
-                          onPressed: () => _onFABPressed(),
-                          tooltip: 'Add Save Box',
-                        ),
-                        bottomNavigationBar: BottomNavigationBar(
-                          elevation: 8,
-                          backgroundColor: Color(0xff323232),
-                          items: [
-                            BottomNavigationBarItem(
-                              icon: Icon(Icons.crop_square),
-                              title: Text('hehe'),
-                            ),
-                            BottomNavigationBarItem(
-                              icon: Icon(Icons.gradient),
-                              title: Text('hehe'),
-                            ),
-                          ],
-                        ),
-                      );
-                    });
-              });
-        });
+        itemCount: 4,
+        navBarStyle:
+            NavBarStyle.style1 // Choose the nav bar style with this property
+        );
   }
 }
