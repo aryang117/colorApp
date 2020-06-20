@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:colorApp/Screens/home.dart';
+import 'package:colorApp/Screens/solidColor.dart';
 
 TextStyle formStyle = new TextStyle(fontSize: 20, color: Colors.white);
 
