@@ -1,3 +1,4 @@
+import 'package:colorApp/Screens/gradient.dart';
 import 'package:colorApp/Screens/solidColor.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +14,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int i = 0;
-  int abc = 0xff212121;
+  int abc = 0xffffffff;
 
   PersistentTabController _controller;
 
@@ -26,7 +27,7 @@ class _HomeState extends State<Home> {
   List<Widget> _buildScreens() {
     return [
       SolidColor(),
-      SolidColor(),
+      GradientColor(),
       SolidColor(),
       SolidColor(),
     ];
