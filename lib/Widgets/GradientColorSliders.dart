@@ -1,19 +1,78 @@
 import 'package:flutter/material.dart';
 
-import 'package:colorApp/Screens/solidColor.dart';
+ValueNotifier<int> _red = ValueNotifier<int>(0);
+ValueNotifier<int> _green = ValueNotifier<int>(0);
+ValueNotifier<int> _blue = ValueNotifier<int>(0);
 
 TextStyle formStyle = new TextStyle(
   fontSize: 20,
   color: Colors.white,
 );
+ValueNotifier<List> _gradientColorList = ValueNotifier<List>([
+  Color.fromRGBO(0, 0, 0, 1),
+  Color.fromRGBO(0, 0, 0, 1),
+  Color.fromRGBO(0, 0, 0, 1),
+  Color.fromRGBO(0, 0, 0, 1)
+]);
 
-//These are the sliders that allow the user to change colors
-class ColorSliders extends StatefulWidget {
+class GradientColorSliders extends StatefulWidget {
+  const GradientColorSliders({Key key, @required this.gradientColorList})
+      : super(key: key);
+  final List gradientColorList;
+
   @override
-  _ColorSlidersState createState() => _ColorSlidersState();
+  _GradientColorSlidersState createState() => _GradientColorSlidersState();
 }
 
-class _ColorSlidersState extends State<ColorSliders> {
+class _GradientColorSlidersState extends State<GradientColorSliders> {
+  @override
+  Widget build(BuildContext context) {
+    return ValueListenableBuilder(
+        valueListenable: _green,
+        child: null,
+        builder: (context, int _green, child) {
+          return ValueListenableBuilder(
+              valueListenable: _blue,
+              child: null,
+              builder: (context, int _blue, child) {
+                return ValueListenableBuilder(
+                    valueListenable: _red,
+                    child: null,
+                    builder: (context, int _red, child) {
+                      return Container(
+                        color: Color(0xff212121),
+                        child: Column(children: <Widget>[
+                          DropdownButton(
+                            items: <int>[1, 2, 3, 4]
+                                .map<DropdownMenuItem<int>>((int value) {
+                              return DropdownMenuItem<int>(
+                                value: value,
+                                child: Text(value.toString()),
+                              );
+                            }).toList(),
+                            onChanged: (newvalue) {
+                              setState(() {
+                                _gradientColorList.value[newvalue] =
+                                    Color.fromRGBO(_red, _green, _blue, 1);
+                                print('Value = ' + newvalue.toString());
+                              });
+                            },
+                          ),
+                          GradientSliders(),
+                        ]),
+                      );
+                    });
+              });
+        });
+  }
+}
+
+class GradientSliders extends StatefulWidget {
+  @override
+  _GradientSlidersState createState() => _GradientSlidersState();
+}
+
+class _GradientSlidersState extends State<GradientSliders> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -22,15 +81,15 @@ class _ColorSlidersState extends State<ColorSliders> {
         children: <Widget>[
           _Sliders(
             labelTextString: 'R',
-            sliderValue: red.value,
+            sliderValue: _red.value,
           ),
           _Sliders(
             labelTextString: 'G',
-            sliderValue: green.value,
+            sliderValue: _green.value,
           ),
           _Sliders(
             labelTextString: 'B',
-            sliderValue: blue.value,
+            sliderValue: _blue.value,
           )
         ],
       ),
@@ -70,11 +129,11 @@ class __SlidersState extends State<_Sliders> {
               setState(() {
                 print(_newvalue.toInt());
                 if (widget.labelTextString == 'R')
-                  red.value = _newvalue.toInt();
+                  _red.value = _newvalue.toInt();
                 else if (widget.labelTextString == 'G')
-                  green.value = _newvalue.toInt();
+                  _green.value = _newvalue.toInt();
                 else if (widget.labelTextString == 'B')
-                  blue.value = _newvalue.toInt();
+                  _blue.value = _newvalue.toInt();
               });
             },
           ),
@@ -125,11 +184,11 @@ class _SliderTextLabel extends StatelessWidget {
             onChanged: (formValue) {
               if (int.parse(formValue) > 255) formValue = "255";
               if (labelTextString == 'R')
-                red.value = int.parse(formValue);
+                _red.value = int.parse(formValue);
               else if (labelTextString == 'G')
-                green.value = int.parse(formValue);
+                _green.value = int.parse(formValue);
               else if (labelTextString == 'B')
-                blue.value = int.parse(formValue);
+                _blue.value = int.parse(formValue);
             },
           ),
         ),
