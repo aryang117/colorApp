@@ -23,6 +23,11 @@ class GradientDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Color _color1 = gradientColorList.elementAt(0).value;
+    Color _color2 = gradientColorList.elementAt(1).value;
+    Color _color3 = gradientColorList.elementAt(2).value;
+    Color _color4 = gradientColorList.elementAt(3).value;
+
     double screenHeight = MediaQuery.of(context).size.height;
     return Padding(
       padding: new EdgeInsets.fromLTRB(10, 10, 10, 0),
@@ -52,10 +57,10 @@ class GradientDisplay extends StatelessWidget {
                     // 1
                   ],
                   colors: [
-                    gradientColorList[0],
-                    gradientColorList[1],
-                    gradientColorList[2],
-                    gradientColorList[3],
+                    _color1,
+                    _color2,
+                    _color3,
+                    _color4,
                     // gradientColorList[4],
                     // gradientColorList[5],
                     // gradientColorList[6],

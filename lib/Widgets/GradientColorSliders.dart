@@ -55,6 +55,12 @@ class _GradientColorSlidersState extends State<GradientColorSliders> {
                                 _gradientColorList.value[newvalue] =
                                     Color.fromRGBO(_red, _green, _blue, 1);
                                 print('Value = ' + newvalue.toString());
+                                print('Color' +
+                                    newvalue.toString() +
+                                    "=" +
+                                    _red.toString() +
+                                    _green.toString() +
+                                    _blue.toString());
                               });
                             },
                           ),
