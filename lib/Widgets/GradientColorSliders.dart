@@ -1,3 +1,4 @@
+import 'package:colorApp/Logic/GradientBloc.dart';
 import 'package:flutter/material.dart';
 
 TextStyle formStyle = new TextStyle(
@@ -17,9 +18,15 @@ ValueNotifier<List> _gradientColorList = ValueNotifier<List>([
 ]);
 
 class GradientColorSliders extends StatefulWidget {
-  const GradientColorSliders({Key key, @required this.gradientColorList})
+  GradientColorSliders(
+      {Key key,
+      @required this.gradientColorList,
+      @required this.gradientBloc,
+      @required this.snapshot})
       : super(key: key);
   final List gradientColorList;
+  final GradientBloc gradientBloc;
+  final AsyncSnapshot snapshot;
 
   @override
   _GradientColorSlidersState createState() => _GradientColorSlidersState();
@@ -28,49 +35,38 @@ class GradientColorSliders extends StatefulWidget {
 class _GradientColorSlidersState extends State<GradientColorSliders> {
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-        valueListenable: _green,
-        child: null,
-        builder: (context, int _green, child) {
-          return ValueListenableBuilder(
-              valueListenable: _blue,
-              child: null,
-              builder: (context, int _blue, child) {
-                return ValueListenableBuilder(
-                    valueListenable: _red,
-                    child: null,
-                    builder: (context, int _red, child) {
-                      return Container(
-                        color: Color(0xff212121),
-                        child: Column(children: <Widget>[
-                          DropdownButton(
-                            items: <int>[1, 2, 3, 4]
-                                .map<DropdownMenuItem<int>>((int value) {
-                              return DropdownMenuItem<int>(
-                                value: value,
-                                child: Text(value.toString()),
-                              );
-                            }).toList(),
-                            onChanged: (newvalue) {
-                              setState(() {
-                                _gradientColorList.value[newvalue] =
-                                    Color.fromRGBO(_red, _green, _blue, 1);
-                                print('Value = ' + newvalue.toString());
-                                print('Color' +
-                                    newvalue.toString() +
-                                    "=" +
-                                    _red.toString() +
-                                    _green.toString() +
-                                    _blue.toString());
-                              });
-                            },
-                          ),
-                          GradientSliders(),
-                        ]),
-                      );
-                    });
-              });
-        });
+    return Container(
+      color: Color(0xff212121),
+      child: Column(children: <Widget>[
+        DropdownButton(
+          items: <int>[1, 2, 3, 4].map<DropdownMenuItem<int>>((int value) {
+            return DropdownMenuItem<int>(
+              value: value,
+              child: Text(value.toString()),
+            );
+          }).toList(),
+          onChanged: (newValue) {
+            setState(() {
+              this
+                  .widget
+                  .gradientBloc
+                  .getGradientColorChange
+                  .add(this.widget.snapshot.data[newValue]);
+              // _gradientColorList.value[newValue] =
+              //     Color.fromRGBO(_red, _green, _blue, 1);
+              print('Value = ' + newValue.toString());
+              print('Color' +
+                  newValue.toString() +
+                  "=" +
+                  _red.toString() +
+                  _green.toString() +
+                  _blue.toString());
+            });
+          },
+        ),
+        GradientSliders(),
+      ]),
+    );
   }
 }
 
@@ -132,15 +128,15 @@ class __SlidersState extends State<_Sliders> {
             min: 0,
             max: 255,
             divisions: 255,
-            onChanged: (double _newvalue) {
+            onChanged: (double _newValue) {
               setState(() {
-                print(_newvalue.toInt());
+                print(_newValue.toInt());
                 if (widget.labelTextString == 'R')
-                  _red.value = _newvalue.toInt();
+                  _red.value = _newValue.toInt();
                 else if (widget.labelTextString == 'G')
-                  _green.value = _newvalue.toInt();
+                  _green.value = _newValue.toInt();
                 else if (widget.labelTextString == 'B')
-                  _blue.value = _newvalue.toInt();
+                  _blue.value = _newValue.toInt();
               });
             },
           ),
