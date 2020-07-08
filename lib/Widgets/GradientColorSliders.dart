@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
-ValueNotifier<int> _red = ValueNotifier<int>(0);
-ValueNotifier<int> _green = ValueNotifier<int>(0);
-ValueNotifier<int> _blue = ValueNotifier<int>(0);
-
 TextStyle formStyle = new TextStyle(
   fontSize: 20,
   color: Colors.white,
 );
+
+ValueNotifier<int> _red = ValueNotifier<int>(0);
+ValueNotifier<int> _green = ValueNotifier<int>(0);
+ValueNotifier<int> _blue = ValueNotifier<int>(0);
+
 ValueNotifier<List> _gradientColorList = ValueNotifier<List>([
   Color.fromRGBO(0, 0, 0, 1),
   Color.fromRGBO(0, 0, 0, 1),

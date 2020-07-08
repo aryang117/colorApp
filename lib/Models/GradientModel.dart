@@ -12,7 +12,6 @@ class GradientModel {
     this._index = index;
   }
 
-
   set red(int red) {
     this._red = red;
   }
