@@ -4,7 +4,7 @@ class GradientModel {
   int _blue;
   int _index;
 
-  GradientModel(this._red, this._green, this._blue, this._index);
+  GradientModel(this._index, this._red, this._green, this._blue);
 
 //setters
 

@@ -4,10 +4,10 @@ import 'package:colorApp/Models/GradientModel.dart';
 
 class GradientBloc {
   List<GradientModel> _gradientList = [
-    GradientModel(0, 0, 0, 0),
-    GradientModel(1, 0, 0, 0),
-    GradientModel(2, 0, 0, 0),
-    GradientModel(3, 0, 0, 0),
+    GradientModel(0, 36, 227, 124),
+    GradientModel(1, 36, 227, 124),
+    GradientModel(2, 36, 221, 188),
+    GradientModel(3, 36, 221, 188),
   ];
 
   final _gradientListStreamController = StreamController<List<GradientModel>>();
@@ -34,9 +34,8 @@ class GradientBloc {
       _gradientList[gradientModel.index].red = newRed;
       _gradientList[gradientModel.index].green = newGreen;
       _gradientList[gradientModel.index].blue = newBlue;
-
-      getGradientSink.add(_gradientList);
     });
+    getGradientSink.add(_gradientList);
   }
 
   //CLearing the memory
