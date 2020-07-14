@@ -138,10 +138,11 @@ class _RoundedRectangularSliderGradientState
     extends State<RoundedRectangularSliderGradient> {
   double rgbValue() {
     if (this.widget.prefixText.toUpperCase() == 'R')
-      return _redValue;
+      return this.widget.snapshot.data[_index].red.toDouble();
     else if (this.widget.prefixText.toUpperCase() == 'G')
-      return _greenValue;
-    else if (this.widget.prefixText.toUpperCase() == 'B') return _blueValue;
+      return this.widget.snapshot.data[_index].green.toDouble();
+    else if (this.widget.prefixText.toUpperCase() == 'B')
+      return this.widget.snapshot.data[_index].blue.toDouble();
 
     return 0;
   }
@@ -191,9 +192,11 @@ class _RoundedRectangularSliderGradientState
                 _blueValue = value;
                 print(_blueValue);
               }
-              this.widget.gradientBloc.getGradientRedColorChange.add(
-                  GradientModel(_index, _redValue.toInt(), _greenValue.toInt(),
-                      _blueValue.toInt()));
+              this.widget.gradientBloc.getGradientColorChange.add(GradientModel(
+                  _index,
+                  _redValue.toInt(),
+                  _greenValue.toInt(),
+                  _blueValue.toInt()));
 
               print(_redValue.toString() +
                   ' ' +

@@ -13,9 +13,7 @@ class GradientBloc {
   final _gradientListStreamController = StreamController<List<GradientModel>>();
 
   //for changge in the color values of the individual colors
-  final _gradientColorRedChangeController = StreamController<GradientModel>();
-  final _gradientColorGreenChangeController = StreamController<GradientModel>();
-  final _gradientColorBlueChangeController = StreamController<GradientModel>();
+  final _gradientColorChangeController = StreamController<GradientModel>();
 
   //getters
   Stream<List<GradientModel>> get getGradientStream =>
@@ -23,29 +21,14 @@ class GradientBloc {
 
   StreamSink<List<GradientModel>> get getGradientSink =>
       _gradientListStreamController.sink;
-  StreamSink<GradientModel> get getGradientRedColorChange =>
-      _gradientColorRedChangeController.sink;
-  StreamSink<GradientModel> get getGradientGreenColorChange =>
-      _gradientColorGreenChangeController.sink;
-  StreamSink<GradientModel> get getGradientBlueColorChange =>
-      _gradientColorBlueChangeController.sink;
+  StreamSink<GradientModel> get getGradientColorChange =>
+      _gradientColorChangeController.sink;
 
   //Constructor
   GradientBloc() {
-    _gradientColorRedChangeController.stream
-        .listen((GradientModel gradientModel) {
+    _gradientColorChangeController.stream.listen((GradientModel gradientModel) {
       _gradientList[gradientModel.index].red = gradientModel.red;
       _gradientList[gradientModel.index].green = gradientModel.green;
-      _gradientList[gradientModel.index].blue = gradientModel.blue;
-    });
-
-    _gradientColorGreenChangeController.stream
-        .listen((GradientModel gradientModel) {
-      _gradientList[gradientModel.index].green = gradientModel.green;
-    });
-
-    _gradientColorBlueChangeController.stream
-        .listen((GradientModel gradientModel) {
       _gradientList[gradientModel.index].blue = gradientModel.blue;
     });
 
@@ -56,8 +39,6 @@ class GradientBloc {
   void dispose() {
     _gradientListStreamController.close();
 
-    _gradientColorRedChangeController.close();
-    _gradientColorGreenChangeController.close();
-    _gradientColorBlueChangeController.close();
+    _gradientColorChangeController.close();
   }
 }
