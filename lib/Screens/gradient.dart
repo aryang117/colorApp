@@ -1,4 +1,3 @@
-import 'package:colorApp/Screens/solidColor.dart';
 import 'package:flutter/material.dart';
 
 import 'package:colorApp/Widgets/colorSaveBoxes.dart';
@@ -16,14 +15,11 @@ class GradientColor extends StatefulWidget {
 
 class _GradientColorState extends State<GradientColor> {
   final GradientBloc _gradientBloc = new GradientBloc();
-  double _redValue = 0;
-  double _greenValue = 0;
-  double _blueValue = 0;
   @override
-  // void dispose() {
-  //   _gradientBloc.dispose();
-  //   super.dispose();
-  // }
+  void dispose() {
+    _gradientBloc.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -101,70 +97,15 @@ class _GradientColorState extends State<GradientColor> {
                   GradientColorSliders(
                       gradientBloc: _gradientBloc, snapshot: snapshot),
 
-                  // SliderTheme(
-                  //   data: SliderTheme.of(context).copyWith(
-                  //     activeTrackColor: Colors.red[700],
-                  //     inactiveTrackColor: Colors.red[100],
-                  //     trackShape: RectangularSliderTrackShape(),
-                  //     trackHeight: 4.0,
-                  //     thumbColor: Colors.redAccent,
-                  //     thumbShape:
-                  //         RoundSliderThumbShape(enabledThumbRadius: 12.0),
-                  //     overlayColor: Colors.red.withAlpha(32),
-                  //     overlayShape:
-                  //         RoundSliderOverlayShape(overlayRadius: 28.0),
-                  //   ),
-                  //   child: Slider(
-                  //       activeColor: Colors.red,
-                  //       label: _redValue.toString(),
-                  //       value: _redValue,
-                  //       divisions: 255,
-                  //       min: 0,
-                  //       max: 255,
-                  //       onChanged: (double value) {
-                  //         setState(() {
-                  //           _gradientBloc.getGradientRedColorChange.add(
-                  //               GradientModel(1, _redValue.toInt(),
-                  //                   _greenValue.toInt(), _blueValue.toInt()));
-                  //           _redValue = value;
-                  //           print(snapshot.data[1].red);
-                  //           print(_redValue);
-                  //         });
-                  //       }),
-                  // ),
-                  // Slider(
-                  //     activeColor: Colors.green,
-                  //     label: _greenValue.toString(),
-                  //     value: _greenValue,
-                  //     min: 0,
-                  //     max: 255,
-                  //     divisions: 255,
-                  //     onChanged: (double value) {
-                  //       setState(() {
-                  //         _gradientBloc.getGradientGreenColorChange.add(
-                  //             GradientModel(1, _redValue.toInt(),
-                  //                 _greenValue.toInt(), _blueValue.toInt()));
-                  //         _greenValue = value;
-
-                  //         print(_greenValue);
-                  //       });
-                  //     }),
-                  // Slider(
-                  //     activeColor: Colors.blue,
-                  //     label: _blueValue.toString(),
-                  //     value: _blueValue,
-                  //     min: 0,
-                  //     max: 255,
-                  //     divisions: 255,
-                  //     onChanged: (double value) {
-                  //       setState(() {
-                  //         _gradientBloc.getGradientBlueColorChange.add(
-                  //             GradientModel(1, _redValue.toInt(),
-                  //                 _greenValue.toInt(), _blueValue.toInt()));
-                  //         _blueValue = value;
-                  //         print(_blueValue);
-                  //       });
-                  //     }),
+                  IconButton(
+                    onPressed: () {
+                      setState(() {
+                        GradientColor();
+                      });
+                    },
+                    icon: Icon(Icons.replay),
+                    color: Colors.white,
+                  ),
                 ]),
               );
             }

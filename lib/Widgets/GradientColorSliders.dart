@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:colorApp/Logic/GradientBloc.dart';
 import 'package:colorApp/Models/GradientModel.dart';
+import 'package:colorApp/Widgets/RoundedRectangularThumb.dart';
 
 TextStyle formStyle = new TextStyle(
   fontSize: 20,
@@ -80,180 +81,114 @@ class _GradientSlidersState extends State<GradientSliders> {
       padding: EdgeInsets.only(left: 20),
       child: Column(
         children: <Widget>[
-          SliderTheme(
-            data: SliderTheme.of(context).copyWith(
-              activeTrackColor: Colors.red[700],
-              inactiveTrackColor: Colors.red[100],
-              trackShape: RectangularSliderTrackShape(),
-              trackHeight: 4.0,
-              thumbColor: Colors.redAccent,
-              thumbShape: RoundSliderThumbShape(enabledThumbRadius: 12.0),
-              overlayColor: Colors.red.withAlpha(32),
-              overlayShape: RoundSliderOverlayShape(overlayRadius: 28.0),
-            ),
-            child: Slider(
-                activeColor: Colors.red,
-                label: _redValue.toString(),
-                value: _redValue,
-                divisions: 255,
-                min: 0,
-                max: 255,
-                onChanged: (double value) {
-                  setState(() {
-                    this.widget.gradientBloc.getGradientRedColorChange.add(
-                        GradientModel(_index, _redValue.toInt(),
-                            _greenValue.toInt(), _blueValue.toInt()));
-                    _redValue = value;
-                    print(this.widget.snapshot.data[1].red);
-                    print(_redValue);
-                  });
-                }),
+          RoundedRectangularSliderGradient(
+            gradientBloc: this.widget.gradientBloc,
+            snapshot: this.widget.snapshot,
+            prefixText: 'R',
+            activeColor: Colors.red,
+            value: _redValue,
           ),
-          Slider(
-              activeColor: Colors.green,
-              label: _greenValue.toString(),
-              value: _greenValue,
-              min: 0,
-              max: 255,
-              divisions: 255,
-              onChanged: (double value) {
-                setState(() {
-                  this.widget.gradientBloc.getGradientGreenColorChange.add(
-                      GradientModel(_index, _redValue.toInt(),
-                          _greenValue.toInt(), _blueValue.toInt()));
-                  _greenValue = value;
-
-                  print(_greenValue);
-                });
-              }),
-          Slider(
-              activeColor: Colors.blue,
-              label: _blueValue.toString(),
-              value: _blueValue,
-              min: 0,
-              max: 255,
-              divisions: 255,
-              onChanged: (double value) {
-                setState(() {
-                  this.widget.gradientBloc.getGradientBlueColorChange.add(
-                      GradientModel(_index, _redValue.toInt(),
-                          _greenValue.toInt(), _blueValue.toInt()));
-                  _blueValue = value;
-                  print(_blueValue);
-                });
-              }),
+          RoundedRectangularSliderGradient(
+            gradientBloc: this.widget.gradientBloc,
+            snapshot: this.widget.snapshot,
+            prefixText: 'G',
+            activeColor: Colors.green,
+            value: _greenValue,
+          ),
+          RoundedRectangularSliderGradient(
+            gradientBloc: this.widget.gradientBloc,
+            snapshot: this.widget.snapshot,
+            prefixText: 'B',
+            activeColor: Colors.blue,
+            value: _blueValue,
+          ),
         ],
       ),
     );
   }
 }
 
-// class _Sliders extends StatefulWidget {
-//   @override
-//   __SlidersState createState() => __SlidersState();
+class RoundedRectangularSliderGradient extends StatefulWidget {
+  const RoundedRectangularSliderGradient(
+      {Key key,
+      this.gradientBloc,
+      this.snapshot,
+      this.prefixText,
+      this.activeColor,
+      this.value})
+      : super(key: key);
 
-//   const _Sliders(
-//       {Key key,
-//       @required this.labelTextString,
-//       @required this.gradientBloc,
-//       @required this.snapshot})
-//       : super(key: key);
-//   final String labelTextString;
-//   final GradientBloc gradientBloc;
-//   final AsyncSnapshot snapshot;
-// }
+  final GradientBloc gradientBloc;
+  final AsyncSnapshot snapshot;
+  final Color activeColor;
+  final String prefixText;
+  final double value;
 
-// class __SlidersState extends State<_Sliders> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Row(
-//       mainAxisAlignment: MainAxisAlignment.start,
-//       crossAxisAlignment: CrossAxisAlignment.center,
-//       children: <Widget>[
-//         // _SliderTextLabel(
-//         //     labelTextString: widget.labelTextString,
-//         //     gradientBloc: widget.gradientBloc),
-//         Expanded(
-//           child: Slider(
-//             activeColor: Colors.red,
-//             label: _redValue.toString(),
-//             value: _redValue.toDouble(),
-//             divisions: 255,
-//             min: 0,
-//             max: 255,
-//             onChanged: (double _newValue) {
-//               setState(() {
-//                 print(_newValue.toInt());
-//                 if (widget.labelTextString == 'R')
-//                   _redValue = _newValue.toInt();
-//                 else if (widget.labelTextString == 'G')
-//                   _greenValue = _newValue.toInt();
-//                 else if (widget.labelTextString == 'B')
-//                   _blueValue = _newValue.toInt();
-//                 this.widget.gradientBloc.getGradientRedColorChange.add(
-//                     GradientModel(_index, _redValue.toInt(),
-//                         _greenValue.toInt(), _blueValue.toInt()));
-//                 print(this.widget.snapshot.data[1].red);
-//                 print(_redValue);
-//               });
-//             },
-//           ),
-//         ),
-//       ],
-//     );
-//   }
-// }
+  @override
+  _RoundedRectangularSliderGradientState createState() =>
+      _RoundedRectangularSliderGradientState();
+}
 
-// class _SliderTextLabel extends StatelessWidget {
-//   const _SliderTextLabel(
-//       {Key key, @required this.labelTextString, @required this.gradientBloc})
-//       : super(key: key);
-//   final String labelTextString;
-//   final int gradientBloc;
-//   @override
-//   Widget build(BuildContext context) {
-//     final TextEditingController _controller = TextEditingController(
-//       text: gradientBloc.toString(),
-//     );
-//     _controller.value = _controller.value.copyWith(
-//         text: gradientBloc.toString(),
-//         selection:
-//             TextSelection.collapsed(offset: gradientBloc.toString().length));
-//     return Row(
-//       children: [
-//         Container(
-//           padding: new EdgeInsets.only(right: 5),
-//           child: Text(
-//             labelTextString + ':',
-//             style: formStyle,
-//           ),
-//         ),
-//         Container(
-//           alignment: Alignment.center,
-//           width: 35,
-//           height: 40,
-//           child: TextField(
-//             textAlignVertical: TextAlignVertical.center,
-//             style: formStyle,
-//             keyboardType: TextInputType.number,
-//             controller: _controller,
-//             decoration: InputDecoration.collapsed(
-//               hintText: '',
-//               hintStyle: formStyle,
-//               border: UnderlineInputBorder(),
-//             ),
-//             onChanged: (formValue) {
-//               if (int.parse(formValue) > 255) formValue = "255";
-//               if (labelTextString == 'R')
-//                 _red.value = int.parse(formValue);
-//               else if (labelTextString == 'G')
-//                 _green.value = int.parse(formValue);
-//               else if (labelTextString == 'B')
-//                 _blue.value = int.parse(formValue);
-//             },
-//           ),
-//         ),
-//       ],
-//     );
-//   }
-// }
+class _RoundedRectangularSliderGradientState
+    extends State<RoundedRectangularSliderGradient> {
+  double rgbValue() {
+    if (this.widget.prefixText.toUpperCase() == 'R')
+      return _redValue;
+    else if (this.widget.prefixText.toUpperCase() == 'G')
+      return _greenValue;
+    else
+      return _blueValue;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SliderTheme(
+      data: SliderTheme.of(context).copyWith(
+        activeTrackColor: Colors.red[700],
+        inactiveTrackColor: Colors.red[100],
+        trackShape: RoundedRectSliderTrackShape(),
+        trackHeight: 4.0,
+        thumbShape: SliderRoundedRectangularThumb(
+            thumbHeight: 40, thumbRadius: 2, min: 0, max: 255, prefixText: 'R'),
+        thumbColor: Colors.redAccent,
+        overlayColor: Colors.red.withAlpha(32),
+        overlayShape: RoundSliderOverlayShape(overlayRadius: 28.0),
+        tickMarkShape: RoundSliderTickMarkShape(),
+        activeTickMarkColor: Colors.red[700],
+        inactiveTickMarkColor: Colors.red[100],
+        showValueIndicator: ShowValueIndicator.never,
+        valueIndicatorShape: PaddleSliderValueIndicatorShape(),
+        valueIndicatorColor: Colors.redAccent,
+        valueIndicatorTextStyle: TextStyle(
+          color: Colors.white,
+        ),
+      ),
+      child: Slider(
+          activeColor: this.widget.activeColor,
+          label: rgbValue().toString(),
+          value: rgbValue(),
+          min: 0,
+          max: 255,
+          divisions: 255,
+          onChanged: (double value) {
+            setState(() {
+              this.widget.gradientBloc.getGradientBlueColorChange.add(
+                  GradientModel(_index, _redValue.toInt(), _greenValue.toInt(),
+                      _blueValue.toInt()));
+              if (this.widget.prefixText == 'R') {
+                _redValue = value;
+                print(_redValue);
+              }
+              if (this.widget.prefixText == 'G') {
+                _greenValue = value;
+                print(_greenValue);
+              }
+              if (this.widget.prefixText == 'B') {
+                _blueValue = value;
+                print(_blueValue);
+              }
+            });
+          }),
+    );
+  }
+}
