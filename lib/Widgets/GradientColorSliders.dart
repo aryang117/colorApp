@@ -31,7 +31,6 @@ class _GradientColorSlidersState extends State<GradientColorSliders> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Color(0xff212121),
       child: Column(children: <Widget>[
         DropdownButton(
           items: <int>[1, 2, 3, 4].map<DropdownMenuItem<int>>((int value) {
@@ -85,24 +84,27 @@ class _GradientSlidersState extends State<GradientSliders> {
             gradientBloc: this.widget.gradientBloc,
             snapshot: this.widget.snapshot,
             prefixText: 'R',
-            activeColor: Colors.red,
+            inactiveTrackColor: Colors.red[200],
             activeTrackColor: Colors.red[700],
+            thumbColor: Colors.redAccent,
             value: _redValue,
           ),
           RoundedRectangularSliderGradient(
             gradientBloc: this.widget.gradientBloc,
             snapshot: this.widget.snapshot,
             prefixText: 'G',
-            activeColor: Colors.green,
+            inactiveTrackColor: Colors.green[200],
             activeTrackColor: Colors.green[700],
+            thumbColor: Colors.greenAccent,
             value: _greenValue,
           ),
           RoundedRectangularSliderGradient(
             gradientBloc: this.widget.gradientBloc,
             snapshot: this.widget.snapshot,
             prefixText: 'B',
-            activeColor: Colors.blue,
+            inactiveTrackColor: Colors.blue[200],
             activeTrackColor: Colors.blue[700],
+            thumbColor: Colors.blueAccent,
             value: _blueValue,
           ),
         ],
@@ -117,15 +119,17 @@ class RoundedRectangularSliderGradient extends StatefulWidget {
       this.gradientBloc,
       this.snapshot,
       this.prefixText,
-      this.activeColor,
+      this.inactiveTrackColor,
       this.activeTrackColor,
+      this.thumbColor,
       this.value})
       : super(key: key);
 
   final GradientBloc gradientBloc;
   final AsyncSnapshot snapshot;
-  final Color activeColor;
+  final Color inactiveTrackColor;
   final Color activeTrackColor;
+  final Color thumbColor;
   final String prefixText;
   final double value;
 
@@ -152,7 +156,7 @@ class _RoundedRectangularSliderGradientState
     return SliderTheme(
       data: SliderTheme.of(context).copyWith(
         activeTrackColor: this.widget.activeTrackColor,
-        inactiveTrackColor: Colors.red[100],
+        inactiveTrackColor: this.widget.inactiveTrackColor,
         trackShape: RectangularSliderTrackShape(),
         trackHeight: 4.0,
         thumbShape: SliderRoundedRectangularThumb(
@@ -161,8 +165,8 @@ class _RoundedRectangularSliderGradientState
             min: 0,
             max: 255,
             prefixText: this.widget.prefixText),
-        thumbColor: Colors.redAccent,
-        overlayColor: Colors.red.withAlpha(32),
+        thumbColor: this.widget.thumbColor,
+        overlayColor: this.widget.activeTrackColor.withAlpha(32),
         overlayShape: RoundSliderOverlayShape(overlayRadius: 28.0),
         showValueIndicator: ShowValueIndicator.never,
         valueIndicatorShape: PaddleSliderValueIndicatorShape(),
@@ -172,7 +176,6 @@ class _RoundedRectangularSliderGradientState
         ),
       ),
       child: Slider(
-          activeColor: this.widget.activeColor,
           label: rgbValue().toString(),
           value: rgbValue(),
           min: 0,
