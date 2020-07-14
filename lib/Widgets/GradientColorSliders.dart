@@ -86,6 +86,7 @@ class _GradientSlidersState extends State<GradientSliders> {
             snapshot: this.widget.snapshot,
             prefixText: 'R',
             activeColor: Colors.red,
+            activeTrackColor: Colors.red[700],
             value: _redValue,
           ),
           RoundedRectangularSliderGradient(
@@ -93,6 +94,7 @@ class _GradientSlidersState extends State<GradientSliders> {
             snapshot: this.widget.snapshot,
             prefixText: 'G',
             activeColor: Colors.green,
+            activeTrackColor: Colors.green[700],
             value: _greenValue,
           ),
           RoundedRectangularSliderGradient(
@@ -100,6 +102,7 @@ class _GradientSlidersState extends State<GradientSliders> {
             snapshot: this.widget.snapshot,
             prefixText: 'B',
             activeColor: Colors.blue,
+            activeTrackColor: Colors.blue[700],
             value: _blueValue,
           ),
         ],
@@ -115,12 +118,14 @@ class RoundedRectangularSliderGradient extends StatefulWidget {
       this.snapshot,
       this.prefixText,
       this.activeColor,
+      this.activeTrackColor,
       this.value})
       : super(key: key);
 
   final GradientBloc gradientBloc;
   final AsyncSnapshot snapshot;
   final Color activeColor;
+  final Color activeTrackColor;
   final String prefixText;
   final double value;
 
@@ -136,26 +141,28 @@ class _RoundedRectangularSliderGradientState
       return _redValue;
     else if (this.widget.prefixText.toUpperCase() == 'G')
       return _greenValue;
-    else
-      return _blueValue;
+    else if (this.widget.prefixText.toUpperCase() == 'B') return _blueValue;
+
+    return 0;
   }
 
   @override
   Widget build(BuildContext context) {
     return SliderTheme(
       data: SliderTheme.of(context).copyWith(
-        activeTrackColor: Colors.red[700],
+        activeTrackColor: this.widget.activeTrackColor,
         inactiveTrackColor: Colors.red[100],
-        trackShape: RoundedRectSliderTrackShape(),
+        trackShape: RectangularSliderTrackShape(),
         trackHeight: 4.0,
         thumbShape: SliderRoundedRectangularThumb(
-            thumbHeight: 40, thumbRadius: 2, min: 0, max: 255, prefixText: 'R'),
+            thumbHeight: 40,
+            thumbRadius: 2,
+            min: 0,
+            max: 255,
+            prefixText: this.widget.prefixText),
         thumbColor: Colors.redAccent,
         overlayColor: Colors.red.withAlpha(32),
         overlayShape: RoundSliderOverlayShape(overlayRadius: 28.0),
-        tickMarkShape: RoundSliderTickMarkShape(),
-        activeTickMarkColor: Colors.red[700],
-        inactiveTickMarkColor: Colors.red[100],
         showValueIndicator: ShowValueIndicator.never,
         valueIndicatorShape: PaddleSliderValueIndicatorShape(),
         valueIndicatorColor: Colors.redAccent,
@@ -172,9 +179,6 @@ class _RoundedRectangularSliderGradientState
           divisions: 255,
           onChanged: (double value) {
             setState(() {
-              this.widget.gradientBloc.getGradientBlueColorChange.add(
-                  GradientModel(_index, _redValue.toInt(), _greenValue.toInt(),
-                      _blueValue.toInt()));
               if (this.widget.prefixText == 'R') {
                 _redValue = value;
                 print(_redValue);
@@ -187,6 +191,19 @@ class _RoundedRectangularSliderGradientState
                 _blueValue = value;
                 print(_blueValue);
               }
+              this.widget.gradientBloc.getGradientRedColorChange.add(
+                  GradientModel(_index, _redValue.toInt(), _greenValue.toInt(),
+                      _blueValue.toInt()));
+
+              print(_redValue.toString() +
+                  ' ' +
+                  _greenValue.toString() +
+                  ' ' +
+                  _blueValue.toString() +
+                  "hehe" +
+                  this.widget.snapshot.data[_index].red.toString() +
+                  this.widget.snapshot.data[_index].green.toString() +
+                  this.widget.snapshot.data[_index].blue.toString());
             });
           }),
     );
