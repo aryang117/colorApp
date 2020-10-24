@@ -3,19 +3,6 @@ import 'package:flutter/material.dart';
 
 //This displays the Color that the users chooses by adjusting the sliders
 
-// var gradientColorList = [
-//   Color(0xffFF512F),
-//   Color(0xffC324DD),
-//   Color(0xffF64F59),
-//   Color(0xffFF512F),
-//   Color(0xffC324DD),
-//   Color(0xffF64F59),
-//   Color(0xffFF512F),
-//   Color(0xffC324DD),
-//   Color(0xffF64F59),
-//   Color(0xffFF512F)
-// ];
-
 class GradientDisplay extends StatefulWidget {
   const GradientDisplay(
       {Key key,
@@ -61,24 +48,21 @@ class _GradientDisplayState extends State<GradientDisplay> {
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  stops: [
-                    .25,
-                    .5,
-                    .75,
-                    1,
-                  ],
-                  colors: [
-                    _color1,
-                    _color2,
-                    _color3,
-                    _color4,
-                    // gradientColorList[4],
-                    // gradientColorList[5],
-                    // gradientColorList[6],
-                    // gradientColorList[7]
-                  ]),
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                stops: [
+                  .25,
+                  .5,
+                  .75,
+                  1,
+                ],
+                colors: [
+                  _color1,
+                  _color2,
+                  _color3,
+                  _color4,
+                ],
+              ),
               borderRadius: BorderRadius.all(Radius.circular(5)),
             ),
           ),
