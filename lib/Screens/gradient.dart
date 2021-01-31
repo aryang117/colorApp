@@ -113,17 +113,23 @@ class _GradientColorState extends State<GradientColor> {
                         ),
                       ),
                       Container(
+                        width: 55,
                         height: 50,
-                        color: Color(0xff252525),
-                        child: IconButton(
+                        child: MaterialButton(
+                          color: Color(0xff252525),
                           onPressed: () {
                             setState(() {
-                              GradientColor();
+                              Container(
+                                  height: 50,
+                                  //color: Color(0xff252525),
+                                  child: GradientColor());
                             });
                           },
-                          icon: Icon(Icons.replay),
-                          iconSize: 18,
-                          color: Colors.white,
+                          child: Icon(
+                            Icons.replay,
+                            size: 18,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                       // IconButton(
