@@ -283,10 +283,10 @@ class _GradientColorSlidersState extends State<GradientColorSliders> {
     return Container(
       child: Column(children: <Widget>[
         Padding(
-          padding: new EdgeInsets.only(top: 20),
+          padding: new EdgeInsets.only(top: 10),
         ),
         Padding(
-          padding: new EdgeInsets.only(top: 30),
+          padding: new EdgeInsets.only(top: 20),
         ),
         GradientSliders(
           gradientBloc: this.widget.gradientBloc,
