@@ -148,15 +148,37 @@ class _GradientColorState extends State<GradientColor> {
                     snapshot: snapshot,
                     // gradientColor: GradientColor(),
                   ),
-                  IconButton(
+                  /*MaterialButton(
                     onPressed: () {
                       setState(() {
                         GradientColor();
                       });
                     },
-                    icon: Icon(Icons.replay),
+                    child: Icon(Icons.replay),
                     color: Colors.white,
+                  ),*/
+                  RotatedBox(
+                    quarterTurns: 1,
+                    child: Icon(
+                      Icons.sync_alt,
+                      color: Colors.white,
+                    ),
                   ),
+                  Container(
+                    padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
+                    child: TextField(
+                      
+                      style: TextStyle(color: Colors.white),
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(borderSide: BorderSide()),
+                        prefixText: "#  ",
+                        prefixStyle:
+                            TextStyle(color: Colors.white, fontSize: 20),
+                      ),
+                      keyboardType: TextInputType.number,
+                      maxLength: 6,
+                    ),
+                  )
                 ]),
               );
             }
