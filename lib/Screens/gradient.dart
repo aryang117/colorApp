@@ -193,6 +193,11 @@ class _GradientColorState extends State<GradientColor> {
   }
 }
 
+
+
+
+
+
 class ColorSelectorButtons extends StatefulWidget {
   ColorSelectorButtons({Key key, @required this.index, @required this.colorHex})
       : super(key: key);
@@ -204,22 +209,29 @@ class ColorSelectorButtons extends StatefulWidget {
 }
 
 class _ColorSelectorButtonsState extends State<ColorSelectorButtons> {
+  bool _isPressed = false;
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 50,
       width: 80,
-      color: Color(0xff252525),
+      //color: Color(0xff252525),
       child: MaterialButton(
-        // color: Color(0xff252525),
+        color: _isPressed && (_index == this.widget.index)
+            ? Color(0xff252525)
+            : Color(0xff303030),
         child: Text(
           this.widget.colorHex,
           style: colorHexStyle,
         ),
         onPressed: () {
-          _index = this.widget.index;
-          print(_index);
-          GradientColor();
+          setState(() {
+            _index = this.widget.index;
+            print(_index);
+            GradientColor();
+            _isPressed = !_isPressed;
+            if (!_isPressed) _index = 0;
+          });
         },
       ),
     );
