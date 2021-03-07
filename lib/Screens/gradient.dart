@@ -164,21 +164,10 @@ class _GradientColorState extends State<GradientColor> {
                       color: Colors.white,
                     ),
                   ),
-                  Container(
-                    padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
-                    child: TextField(
-                      
-                      style: TextStyle(color: Colors.white),
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(borderSide: BorderSide()),
-                        prefixText: "#  ",
-                        prefixStyle:
-                            TextStyle(color: Colors.white, fontSize: 20),
-                      ),
-                      keyboardType: TextInputType.number,
-                      maxLength: 6,
-                    ),
-                  )
+                  ColorField(
+                      red: snapshot.data[0].red,
+                      green: snapshot.data[0].green,
+                      blue: snapshot.data[0].green),
                 ]),
               );
             }
@@ -193,10 +182,39 @@ class _GradientColorState extends State<GradientColor> {
   }
 }
 
+class ColorField extends StatelessWidget {
+  ColorField(
+      {Key key, @required this.red, @required this.blue, @required this.green})
+      : super(key: key);
 
+  final int red;
+  final int green;
+  final int blue;
 
-
-
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
+      child: TextField(
+        style: TextStyle(color: Colors.white),
+        decoration: InputDecoration(
+          border:
+              OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
+          prefixText: "#  " +
+              red.toRadixString(16) +
+              "" +
+              blue.toRadixString(16) +
+              "" +
+              green.toRadixString(16),
+          prefixStyle: TextStyle(color: Colors.white, fontSize: 20),
+          enabled: true,
+        ),
+        keyboardType: TextInputType.number,
+        maxLength: 6,
+      ),
+    );
+  }
+}
 
 class ColorSelectorButtons extends StatefulWidget {
   ColorSelectorButtons({Key key, @required this.index, @required this.colorHex})
