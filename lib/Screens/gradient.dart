@@ -165,9 +165,9 @@ class _GradientColorState extends State<GradientColor> {
                     ),
                   ),
                   ColorField(
-                      red: snapshot.data[0].red,
-                      green: snapshot.data[0].green,
-                      blue: snapshot.data[0].blue),
+                      red: snapshot.data[_index.value].red,
+                      green: snapshot.data[_index.value].green,
+                      blue: snapshot.data[_index.value].blue),
                 ]),
               );
             }
@@ -179,6 +179,18 @@ class _GradientColorState extends State<GradientColor> {
         tooltip: 'Add Save Box',
       ),
     );
+  }
+}
+
+class ColorTextField extends StatefulWidget {
+  @override
+  _ColorTextFieldState createState() => _ColorTextFieldState();
+}
+
+class _ColorTextFieldState extends State<ColorTextField> {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
   }
 }
 
