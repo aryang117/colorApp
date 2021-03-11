@@ -16,7 +16,7 @@ TextStyle colorHexStyle = new TextStyle(
   fontWeight: FontWeight.w600,
 );
 
-int _index = 0;
+ValueNotifier<int> _index = ValueNotifier(0);
 
 class GradientColor extends StatefulWidget {
   @override
@@ -235,7 +235,7 @@ class _ColorSelectorButtonsState extends State<ColorSelectorButtons> {
       width: 80,
       //color: Color(0xff252525),
       child: MaterialButton(
-        color: _isPressed && (_index == this.widget.index)
+        color: _isPressed && (_index.value == this.widget.index)
             ? Color(0xff252525)
             : Color(0xff303030),
         child: Text(
@@ -244,11 +244,11 @@ class _ColorSelectorButtonsState extends State<ColorSelectorButtons> {
         ),
         onPressed: () {
           setState(() {
-            _index = this.widget.index;
-            print(_index);
+            _index.value = this.widget.index;
+            print("_index : " + _index.value.toString());
             GradientColor();
             _isPressed = !_isPressed;
-            if (!_isPressed) _index = 0;
+            if (!_isPressed) _index.value = 0;
           });
         },
       ),
@@ -423,11 +423,11 @@ class _RoundedRectangularSliderGradientState
     extends State<RoundedRectangularSliderGradient> {
   double rgbValue() {
     if (this.widget.prefixText.toUpperCase() == 'R')
-      return this.widget.snapshot.data[_index].red.toDouble();
+      return this.widget.snapshot.data[_index.value].red.toDouble();
     else if (this.widget.prefixText.toUpperCase() == 'G')
-      return this.widget.snapshot.data[_index].green.toDouble();
+      return this.widget.snapshot.data[_index.value].green.toDouble();
     else if (this.widget.prefixText.toUpperCase() == 'B')
-      return this.widget.snapshot.data[_index].blue.toDouble();
+      return this.widget.snapshot.data[_index.value].blue.toDouble();
 
     return 0;
   }
@@ -466,23 +466,23 @@ class _RoundedRectangularSliderGradientState
             setState(() {
               if (this.widget.prefixText == 'R') {
                 _redValue = value;
-                print(_redValue);
+                print("red: " + _redValue.toString());
               }
               if (this.widget.prefixText == 'G') {
                 _greenValue = value;
-                print(_greenValue);
+                print("green: " + _greenValue.toString());
               }
               if (this.widget.prefixText == 'B') {
                 _blueValue = value;
-                print(_blueValue);
+                print("blue: " + _blueValue.toString());
               }
               this.widget.gradientBloc.getGradientColorChange.add(GradientModel(
-                  _index,
+                  _index.value,
                   _redValue.toInt(),
                   _greenValue.toInt(),
                   _blueValue.toInt()));
 
-              // print(_redValue.toString() +
+              // print("" + _redValurede.toString().toString() +
               //     ' ' +
               //     _greenValue.toString() +
               //     ' ' +
