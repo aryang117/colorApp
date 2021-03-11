@@ -167,7 +167,7 @@ class _GradientColorState extends State<GradientColor> {
                   ColorField(
                       red: snapshot.data[0].red,
                       green: snapshot.data[0].green,
-                      blue: snapshot.data[0].green),
+                      blue: snapshot.data[0].blue),
                 ]),
               );
             }
@@ -203,9 +203,9 @@ class ColorField extends StatelessWidget {
           prefixText: "#  " +
               red.toRadixString(16) +
               "" +
-              blue.toRadixString(16) +
+              green.toRadixString(16) +
               "" +
-              green.toRadixString(16),
+              blue.toRadixString(16),
           prefixStyle: TextStyle(color: Colors.white, fontSize: 20),
           enabled: true,
         ),
