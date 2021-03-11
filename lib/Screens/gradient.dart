@@ -207,7 +207,7 @@ class ColorField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
-      child: TextField(
+      child: TextFormField(
         style: TextStyle(color: Colors.white),
         decoration: InputDecoration(
           border:
@@ -219,10 +219,10 @@ class ColorField extends StatelessWidget {
               "" +
               blue.toRadixString(16),
           prefixStyle: TextStyle(color: Colors.white, fontSize: 20),
-          enabled: true,
         ),
         keyboardType: TextInputType.number,
         maxLength: 6,
+        readOnly: true,
       ),
     );
   }
