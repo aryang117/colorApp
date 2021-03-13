@@ -116,7 +116,7 @@ class _GradientColorState extends State<GradientColor> {
                         width: 55,
                         height: 50,
                         child: MaterialButton(
-                          color: Color(0xff252525),
+                          color: Color(0xff00a35a),
                           onPressed: () {
                             setState(() {
                               Container(
@@ -127,7 +127,7 @@ class _GradientColorState extends State<GradientColor> {
                           },
                           child: Icon(
                             Icons.replay,
-                            size: 18,
+                            size: 22,
                             color: Colors.white,
                           ),
                         ),
