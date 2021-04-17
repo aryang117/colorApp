@@ -120,7 +120,9 @@ class _GradientColorState extends State<GradientColor> {
                         ),
                       ),
 
-                      //Bloc Model doesn't refresh data automatically so had to create a refresh button
+                      //Bloc Model doesn't refresh data automatically
+                      //(the data is a 2D list, but only elements are modified NOT the WHOLE 2D List, so BLoC doesn't refresh it automatically)
+                      // this setState refreshes the whole widget
                       Container(
                         width: 55,
                         height: 50,
@@ -128,7 +130,7 @@ class _GradientColorState extends State<GradientColor> {
                           color: Color(0xff00a35a),
                           onPressed: () {
                             setState(() {
-                              Container(height: 50, child: GradientColor());
+                              print('widget reload');
                             });
                           },
                           child: Icon(
