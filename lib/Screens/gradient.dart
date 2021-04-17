@@ -138,15 +138,6 @@ class _GradientColorState extends State<GradientColor> {
                           ),
                         ),
                       ),
-                      // IconButton(
-                      //   onPressed: () {
-                      //     setState(() {
-                      //       GradientColor();
-                      //     });
-                      //   },
-                      //   icon: Icon(Icons.replay),
-                      //   color: Colors.white,
-                      // ),
                     ],
                   ),
 
@@ -156,15 +147,6 @@ class _GradientColorState extends State<GradientColor> {
                     snapshot: snapshot,
                     // gradientColor: GradientColor(),
                   ),
-                  /*MaterialButton(
-                    onPressed: () {
-                      setState(() {
-                        GradientColor();
-                      });
-                    },
-                    child: Icon(Icons.replay),
-                    color: Colors.white,
-                  ),*/
 
                   // Visual Indicator between Slider and Text Display
                   RotatedBox(
