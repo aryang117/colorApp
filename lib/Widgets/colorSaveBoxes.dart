@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
+//These boxes will (if feasible else removed) be used to save colors,
+//present in the FABs on SolidColor and GradientScreen
 class ColorSaveBoxesList extends StatelessWidget {
-const ColorSaveBoxesList({Key key, @required this.i}):super(key: key);
+  const ColorSaveBoxesList({Key key, @required this.i}) : super(key: key);
 
   final int i;
   @override

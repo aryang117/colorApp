@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+//return color code in HEX, not being used anymore
 class ColorCode extends StatelessWidget {
   const ColorCode(
       {Key key, @required this.red, @required this.green, @required this.blue})

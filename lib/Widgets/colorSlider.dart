@@ -7,6 +7,7 @@ TextStyle formStyle = new TextStyle(
   color: Colors.white,
 );
 
+//FOR SOLID COLOR
 //These are the sliders that allow the user to change colors
 class ColorSliders extends StatefulWidget {
   @override

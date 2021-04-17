@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+//Custom Slider Thumbs for Gradient Color SLiders
 class SliderRoundedRectangularThumb extends SliderComponentShape {
   const SliderRoundedRectangularThumb({
     this.thumbRadius,
