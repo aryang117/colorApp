@@ -9,6 +9,7 @@ ValueNotifier<int> red = ValueNotifier<int>(0);
 ValueNotifier<int> green = ValueNotifier<int>(0);
 ValueNotifier<int> blue = ValueNotifier<int>(0);
 
+//Main SolidColor class, doesn't use BLoC
 class SolidColor extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -26,6 +27,8 @@ class SolidColor extends StatelessWidget {
       );
     }
 
+//ValueListenable listens to green, blue and red values (modified by color sliders) and changes are reflected real-time
+//ALso, Bad Code Should be replaced
     return ValueListenableBuilder(
         valueListenable: green,
         child: null,
