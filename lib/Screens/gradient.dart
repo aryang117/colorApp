@@ -16,8 +16,10 @@ TextStyle colorHexStyle = new TextStyle(
   fontWeight: FontWeight.w600,
 );
 
+//index for different colors
 ValueNotifier<int> _index = ValueNotifier(0);
 
+// Main Gradient Class,
 class GradientColor extends StatefulWidget {
   @override
   _GradientColorState createState() => _GradientColorState();
@@ -39,8 +41,9 @@ class _GradientColorState extends State<GradientColor> {
 
   @override
   Widget build(BuildContext context) {
-    double screenheight = MediaQuery.of(context).size.height;
+    //double screenheight = MediaQuery.of(context).size.height; - not using anymore, will be removed in future
 
+    //savie floating action button
     void _onFABPressed() {
       showModalBottomSheet(
         context: context,
@@ -55,8 +58,12 @@ class _GradientColorState extends State<GradientColor> {
 
     return Scaffold(
       backgroundColor: Color(0xff181818),
+
+      //Using the bloc model for Gradient which refreshes value for the colors after change
       body: StreamBuilder<List<GradientModel>>(
           stream: _gradientBloc.getGradientStream,
+
+          //Initial Data Doesn't do anything, all colors start with #000,
           initialData: [
             GradientModel(0, 200, 0, 0),
             GradientModel(1, 0, 200, 0),
@@ -112,6 +119,8 @@ class _GradientColorState extends State<GradientColor> {
                           snapshot.data[3].blue,
                         ),
                       ),
+
+                      //Bloc Model doesn't refresh data automatically so had to create a refresh button
                       Container(
                         width: 55,
                         height: 50,
@@ -119,10 +128,7 @@ class _GradientColorState extends State<GradientColor> {
                           color: Color(0xff00a35a),
                           onPressed: () {
                             setState(() {
-                              Container(
-                                  height: 50,
-                                  //color: Color(0xff252525),
-                                  child: GradientColor());
+                              Container(height: 50, child: GradientColor());
                             });
                           },
                           child: Icon(
@@ -143,6 +149,8 @@ class _GradientColorState extends State<GradientColor> {
                       // ),
                     ],
                   ),
+
+                  //the sliders that allow a color's RGB to be changed
                   GradientColorSliders(
                     gradientBloc: _gradientBloc,
                     snapshot: snapshot,
@@ -157,6 +165,8 @@ class _GradientColorState extends State<GradientColor> {
                     child: Icon(Icons.replay),
                     color: Colors.white,
                   ),*/
+
+                  // Visual Indicator between Slider and Text Display
                   RotatedBox(
                     quarterTurns: 1,
                     child: Icon(
@@ -164,6 +174,8 @@ class _GradientColorState extends State<GradientColor> {
                       color: Colors.white,
                     ),
                   ),
+
+                  // Text Field Showing the color's (acc to its index) the color's text value
                   ColorField(
                       red: snapshot.data[_index.value].red,
                       green: snapshot.data[_index.value].green,
@@ -182,6 +194,8 @@ class _GradientColorState extends State<GradientColor> {
   }
 }
 
+// the textfield at the bottom that display the color's hex values
+// BROKEN, COLORTEXTIELD and COLORFIELD
 class ColorTextField extends StatefulWidget {
   @override
   _ColorTextFieldState createState() => _ColorTextFieldState();
@@ -194,6 +208,7 @@ class _ColorTextFieldState extends State<ColorTextField> {
   }
 }
 
+//broken, should be replaced with colortextfield
 class ColorField extends StatelessWidget {
   ColorField(
       {Key key, @required this.red, @required this.blue, @required this.green})
@@ -228,6 +243,7 @@ class ColorField extends StatelessWidget {
   }
 }
 
+// the buttons below the gradient display to switch colors and display their respective hex values
 class ColorSelectorButtons extends StatefulWidget {
   ColorSelectorButtons({Key key, @required this.index, @required this.colorHex})
       : super(key: key);
@@ -273,18 +289,11 @@ TextStyle formStyle = new TextStyle(
   color: Colors.white,
 );
 
-// TextStyle colorHexStyle = new TextStyle(
-//   fontSize: 8,
-//   color: Colors.white,
-//   fontWeight: FontWeight.w600,
-// );
-
-// int _index = 0;
-
 double _redValue = 0;
 double _greenValue = 0;
 double _blueValue = 0;
 
+//
 class GradientColorSliders extends StatefulWidget {
   GradientColorSliders({
     Key key,
@@ -327,35 +336,7 @@ class _GradientColorSlidersState extends State<GradientColorSliders> {
   }
 }
 
-// class ColorSelectorButtons extends StatefulWidget {
-//   ColorSelectorButtons({Key key, @required this.index, @required this.colorHex})
-//       : super(key: key);
-
-//   final int index;
-//   final String colorHex;
-//   @override
-//   _ColorSelectorButtonsState createState() => _ColorSelectorButtonsState();
-// }
-
-// class _ColorSelectorButtonsState extends State<ColorSelectorButtons> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       height: 50,
-//       child: MaterialButton(
-//         color: Color(0xff252525),
-//         child: Text(
-//           this.widget.colorHex,
-//           style: colorHexStyle,
-//         ),
-//         onPressed: () {
-//           _index = this.widget.index;
-//         },
-//       ),
-//     );
-//   }
-// }
-
+//the sliders that adjust the RGB values of the color
 class GradientSliders extends StatefulWidget {
   GradientSliders(
       {Key key, @required this.gradientBloc, @required this.snapshot})
@@ -406,6 +387,7 @@ class _GradientSlidersState extends State<GradientSliders> {
   }
 }
 
+// the sliders are custom and this is their definition
 class RoundedRectangularSliderGradient extends StatefulWidget {
   const RoundedRectangularSliderGradient(
       {Key key,
@@ -493,17 +475,6 @@ class _RoundedRectangularSliderGradientState
                   _redValue.toInt(),
                   _greenValue.toInt(),
                   _blueValue.toInt()));
-
-              // print("" + _redValurede.toString().toString() +
-              //     ' ' +
-              //     _greenValue.toString() +
-              //     ' ' +
-              //     _blueValue.toString() +
-              //     "hehe" +
-              //     this.widget.snapshot.data[_index].red.toString() +
-              //     this.widget.snapshot.data[_index].green.toString() +
-              //     this.widget.snapshot.data[_index].blue.toString() +
-              //     this.widget.snapshot.data);
             });
           }),
     );
