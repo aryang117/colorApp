@@ -9,7 +9,7 @@ ValueNotifier<int> red = ValueNotifier<int>(0);
 ValueNotifier<int> green = ValueNotifier<int>(0);
 ValueNotifier<int> blue = ValueNotifier<int>(0);
 
-//Main SolidColor class, doesn't use BLoC
+//Main SolidColor class, doesn't use BLoC, since it isn't that complicated (as only 1 color is involved), ValueNotifiers do the job fine
 class SolidColor extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
