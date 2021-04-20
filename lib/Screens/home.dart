@@ -70,9 +70,8 @@ class _HomeState extends State<Home> {
           setState(
               () {}); // This is required to update the nav bar if Android back button is pressed
         },
-        itemCount: 4,
         navBarStyle:
-            NavBarStyle.style13 // Choose the nav bar style with this property
+            NavBarStyle.style12 // Choose the nav bar style with this property
         );
   }
 }
