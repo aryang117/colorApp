@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
+//home class, contains bottom nav bar (whose Ist item is the screen displayed by default)
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
@@ -29,6 +30,7 @@ class _HomeState extends State<Home> {
     ];
   }
 
+  //items of the nav bar, the first item is the home screen
   List<PersistentBottomNavBarItem> _navBarsItems() {
     return [
       PersistentBottomNavBarItem(
@@ -54,6 +56,7 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    //bottom nav bar class
     return PersistentTabView(
         controller: _controller,
         screens: _buildScreens(),
