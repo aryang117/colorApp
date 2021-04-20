@@ -60,7 +60,6 @@ class _HomeState extends State<Home> {
         items:
             _navBarsItems(), // Redundant here but defined to demonstrate for other than custom style
         confineInSafeArea: true,
-        //elevation: true,
         backgroundColor: Color(0xff282828),
         handleAndroidBackButtonPress: true,
         onItemSelected: (int) {
