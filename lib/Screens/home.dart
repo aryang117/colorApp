@@ -36,21 +36,18 @@ class _HomeState extends State<Home> {
         title: ("Solid"),
         activeColor: Colors.white,
         inactiveColor: Colors.grey,
-        // isTranslucent: false,
       ),
       PersistentBottomNavBarItem(
         icon: Icon(Icons.gradient),
         title: ("Gradient"),
         activeColor: Colors.white,
         inactiveColor: Colors.grey,
-        //   isTranslucent: false,
       ),
       PersistentBottomNavBarItem(
         icon: Icon(Icons.settings),
         title: ("Settings"),
         activeColor: Colors.white,
         inactiveColor: Colors.grey,
-        //  isTranslucent: false,
       ),
     ];
   }
