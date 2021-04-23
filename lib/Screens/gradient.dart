@@ -43,19 +43,6 @@ class _GradientColorState extends State<GradientColor> {
   Widget build(BuildContext context) {
     //double screenheight = MediaQuery.of(context).size.height; - not using anymore, will be removed in future
 
-    //savie floating action button
-    void _onFABPressed() {
-      showModalBottomSheet(
-        context: context,
-        builder: (context) {
-          return Container(
-              color: Color(0xff181818),
-              padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
-              child: ColorSaveBoxesList(i: 4));
-        },
-      );
-    }
-
     return Scaffold(
       backgroundColor: Color(0xff181818),
 
@@ -171,12 +158,6 @@ class _GradientColorState extends State<GradientColor> {
               );
             }
           }),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-      floatingActionButton: FloatingActionButton.extended(
-        label: Text('+ Save'),
-        onPressed: () => _onFABPressed(),
-        tooltip: 'Add Save Box',
-      ),
     );
   }
 }
