@@ -202,6 +202,10 @@ class ColorField extends StatelessWidget {
               "" +
               blue.toRadixString(16),
           prefixStyle: TextStyle(color: Colors.white, fontSize: 20),
+          suffixIcon: IconButton(
+            icon: Icon(Icons.copy_rounded),
+            onPressed: () {},
+          ),
         ),
         keyboardType: TextInputType.number,
         maxLength: 6,
