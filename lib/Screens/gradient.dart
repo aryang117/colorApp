@@ -208,11 +208,13 @@ class ColorField extends StatelessWidget {
             icon: Icon(Icons.copy_rounded),
             onPressed: () {
               final snackBar = SnackBar(
-                content: Text('Copied Color 1 to Clipboard!'),
+                content: Text('Copied Color ' +
+                    (_index.value + 1).toString() +
+                    ' to Clipboard!'),
                 action: SnackBarAction(
-                  label: 'Undo',
+                  label: 'DISMISS',
                   onPressed: () {
-                    // Some code to undo the change.
+                    ScaffoldMessenger.of(context).removeCurrentSnackBar();
                   },
                 ),
               );
