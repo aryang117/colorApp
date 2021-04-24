@@ -207,6 +207,15 @@ class ColorField extends StatelessWidget {
           suffixIcon: IconButton(
             icon: Icon(Icons.copy_rounded),
             onPressed: () {
+              final snackBar = SnackBar(
+                content: Text('Copied Color 1 to Clipboard!'),
+                action: SnackBarAction(
+                  label: 'Undo',
+                  onPressed: () {
+                    // Some code to undo the change.
+                  },
+                ),
+              );
               Clipboard.setData(new ClipboardData(
                   text: 'Red: ' +
                       red.toRadixString(16) +
@@ -214,6 +223,7 @@ class ColorField extends StatelessWidget {
                       green.toRadixString(16) +
                       ' Blue: ' +
                       blue.toRadixString(16)));
+              ScaffoldMessenger.of(context).showSnackBar(snackBar);
             },
           ),
         ),
