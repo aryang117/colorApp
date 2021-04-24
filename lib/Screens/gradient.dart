@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
-import 'package:colorApp/Widgets/colorSaveBoxes.dart';
-import 'package:colorApp/Widgets/colorCodeDisplay.dart';
-import 'package:colorApp/Widgets/GradientColorSliders.dart';
+import 'package:flutter/services.dart';
+
+import 'package:colorApp/Widgets/colorSaveBoxes.dart'; //redundant, moved all its code here
+import 'package:colorApp/Widgets/colorCodeDisplay.dart'; //redundant, moved all its code here
+import 'package:colorApp/Widgets/GradientColorSliders.dart'; //redundant, moved all its code here
 import 'package:colorApp/Widgets/GradientDisplay.dart';
 
 import 'package:colorApp/Models/GradientModel.dart';
@@ -204,7 +206,15 @@ class ColorField extends StatelessWidget {
           prefixStyle: TextStyle(color: Colors.white, fontSize: 20),
           suffixIcon: IconButton(
             icon: Icon(Icons.copy_rounded),
-            onPressed: () {},
+            onPressed: () {
+              Clipboard.setData(new ClipboardData(
+                  text: 'Red: ' +
+                      red.toRadixString(16) +
+                      ' Green: ' +
+                      green.toRadixString(16) +
+                      ' Blue: ' +
+                      blue.toRadixString(16)));
+            },
           ),
         ),
         keyboardType: TextInputType.number,
