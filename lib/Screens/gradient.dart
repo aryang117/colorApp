@@ -139,7 +139,6 @@ class _GradientColorState extends State<GradientColor> {
                   GradientColorSliders(
                     gradientBloc: _gradientBloc,
                     snapshot: snapshot,
-                    // gradientColor: GradientColor(),
                   ),
 
                   // Visual Indicator between Slider and Text Display
