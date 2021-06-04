@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
-import 'package:colorApp/Widgets/colorSaveBoxes.dart';
-import 'package:colorApp/Widgets/colorCodeDisplay.dart';
-import 'package:colorApp/Widgets/GradientColorSliders.dart';
+import 'package:flutter/services.dart';
+
+import 'package:colorApp/Widgets/colorSaveBoxes.dart'; //redundant, moved all its code here
+import 'package:colorApp/Widgets/colorCodeDisplay.dart'; //redundant, moved all its code here
+import 'package:colorApp/Widgets/GradientColorSliders.dart'; //redundant, moved all its code here
 import 'package:colorApp/Widgets/GradientDisplay.dart';
 
 import 'package:colorApp/Models/GradientModel.dart';
@@ -43,19 +45,6 @@ class _GradientColorState extends State<GradientColor> {
   Widget build(BuildContext context) {
     //double screenheight = MediaQuery.of(context).size.height; - not using anymore, will be removed in future
 
-    //savie floating action button
-    void _onFABPressed() {
-      showModalBottomSheet(
-        context: context,
-        builder: (context) {
-          return Container(
-              color: Color(0xff181818),
-              padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
-              child: ColorSaveBoxesList(i: 4));
-        },
-      );
-    }
-
     return Scaffold(
       backgroundColor: Color(0xff181818),
 
@@ -84,70 +73,72 @@ class _GradientColorState extends State<GradientColor> {
                     color3: snapshot.data[2],
                     color4: snapshot.data[3],
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ColorSelectorButtons(
-                        index: 0,
-                        colorHex: colorHexMaker(
-                          snapshot.data[0].red,
-                          snapshot.data[0].green,
-                          snapshot.data[0].blue,
-                        ),
-                      ),
-                      ColorSelectorButtons(
-                        index: 1,
-                        colorHex: colorHexMaker(
-                          snapshot.data[1].red,
-                          snapshot.data[1].green,
-                          snapshot.data[1].blue,
-                        ),
-                      ),
-                      ColorSelectorButtons(
-                        index: 2,
-                        colorHex: colorHexMaker(
-                          snapshot.data[2].red,
-                          snapshot.data[2].green,
-                          snapshot.data[2].blue,
-                        ),
-                      ),
-                      ColorSelectorButtons(
-                        index: 3,
-                        colorHex: colorHexMaker(
-                          snapshot.data[3].red,
-                          snapshot.data[3].green,
-                          snapshot.data[3].blue,
-                        ),
-                      ),
-
-                      //Bloc Model doesn't refresh data automatically
-                      //(the data is a 2D list, but only elements are modified NOT the WHOLE 2D List, so BLoC doesn't refresh it automatically)
-                      // this setState refreshes the whole widget
-                      Container(
-                        width: 55,
-                        height: 50,
-                        child: MaterialButton(
-                          color: Color(0xff00a35a),
-                          onPressed: () {
-                            setState(() {
-                              print('widget reload');
-                            });
-                          },
-                          child: Icon(
-                            Icons.replay,
-                            size: 22,
-                            color: Colors.white,
+                  Container(
+                    width: MediaQuery.of(context).size.width - 20,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ColorSelectorButtons(
+                          index: 0,
+                          colorHex: colorHexMaker(
+                            snapshot.data[0].red,
+                            snapshot.data[0].green,
+                            snapshot.data[0].blue,
                           ),
                         ),
-                      ),
-                    ],
+                        ColorSelectorButtons(
+                          index: 1,
+                          colorHex: colorHexMaker(
+                            snapshot.data[1].red,
+                            snapshot.data[1].green,
+                            snapshot.data[1].blue,
+                          ),
+                        ),
+                        ColorSelectorButtons(
+                          index: 2,
+                          colorHex: colorHexMaker(
+                            snapshot.data[2].red,
+                            snapshot.data[2].green,
+                            snapshot.data[2].blue,
+                          ),
+                        ),
+                        ColorSelectorButtons(
+                          index: 3,
+                          colorHex: colorHexMaker(
+                            snapshot.data[3].red,
+                            snapshot.data[3].green,
+                            snapshot.data[3].blue,
+                          ),
+                        ),
+
+                        //Bloc Model doesn't refresh data automatically
+                        //(the data is a 2D list, but only elements are modified NOT the WHOLE 2D List, so BLoC doesn't refresh it automatically)
+                        // this setState refreshes the whole widget
+                        Container(
+                          width: (MediaQuery.of(context).size.width - 132) / 5,
+                          height: 50,
+                          child: MaterialButton(
+                            color: Color(0xff00a35a),
+                            onPressed: () {
+                              setState(() {
+                                print('widget reload');
+                              });
+                            },
+                            child: Icon(
+                              Icons.replay,
+                              size: 22,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
 
                   //the sliders that allow a color's RGB to be changed
                   GradientColorSliders(
                     gradientBloc: _gradientBloc,
                     snapshot: snapshot,
-                    // gradientColor: GradientColor(),
                   ),
 
                   // Visual Indicator between Slider and Text Display
@@ -168,12 +159,6 @@ class _GradientColorState extends State<GradientColor> {
               );
             }
           }),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-      floatingActionButton: FloatingActionButton.extended(
-        label: Text('+ Save'),
-        onPressed: () => _onFABPressed(),
-        tooltip: 'Add Save Box',
-      ),
     );
   }
 }
@@ -218,6 +203,30 @@ class ColorField extends StatelessWidget {
               "" +
               blue.toRadixString(16),
           prefixStyle: TextStyle(color: Colors.white, fontSize: 20),
+          suffixIcon: IconButton(
+            icon: Icon(Icons.copy_rounded),
+            onPressed: () {
+              final snackBar = SnackBar(
+                content: Text('Copied Color ' +
+                    (_index.value + 1).toString() +
+                    ' to Clipboard!'),
+                action: SnackBarAction(
+                  label: 'DISMISS',
+                  onPressed: () {
+                    ScaffoldMessenger.of(context).removeCurrentSnackBar();
+                  },
+                ),
+              );
+              Clipboard.setData(new ClipboardData(
+                  text: 'Red: ' +
+                      red.toRadixString(16) +
+                      ' Green: ' +
+                      green.toRadixString(16) +
+                      ' Blue: ' +
+                      blue.toRadixString(16)));
+              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            },
+          ),
         ),
         keyboardType: TextInputType.number,
         maxLength: 6,
@@ -244,7 +253,7 @@ class _ColorSelectorButtonsState extends State<ColorSelectorButtons> {
   Widget build(BuildContext context) {
     return Container(
       height: 50,
-      width: 80,
+      width: (MediaQuery.of(context).size.width + 8) / 5,
       //color: Color(0xff252525),
       child: MaterialButton(
         color: _isPressed && (_index.value == this.widget.index)
