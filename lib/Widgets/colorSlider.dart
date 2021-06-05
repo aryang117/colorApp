@@ -19,7 +19,6 @@ class _SolidColorSlidersState extends State<SolidColorSliders> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left: 20),
       child: Column(
         children: <Widget>[
           RoundedRectangularSliderSolidColor(
@@ -116,17 +115,26 @@ class _RoundedRectangularSliderSolidColorState
           divisions: 255,
           onChanged: (double value) {
             setState(() {
-              if (this.widget.prefixText == 'R') {
-                red.value = value.toInt();
-                print("red: " + red.value.toString());
-              }
-              if (this.widget.prefixText == 'G') {
-                green.value = value.toInt();
-                print("green: " + green.value.toString());
-              }
-              if (this.widget.prefixText == 'B') {
-                blue.value = value.toInt();
-                print("blue: " + blue.value.toString());
+              switch (this.widget.prefixText) {
+                case 'R':
+                  {
+                    red.value = value.toInt();
+                    print("red: " + red.value.toString());
+                  }
+                  break;
+                case 'G':
+                  {
+                    green.value = value.toInt();
+                    print("green: " + green.value.toString());
+                  }
+                  break;
+                case 'B':
+                  {
+                    blue.value = value.toInt();
+                    print("blue: " + blue.value.toString());
+                  }
+                  break;
+                default:
               }
             });
           }),
