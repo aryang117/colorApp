@@ -36,11 +36,11 @@ class SolidColor extends StatelessWidget {
                         body: SingleChildScrollView(
                           child: Column(children: <Widget>[
                             ColorDisplay(red: red, blue: blue, green: green),
-                            ColorCode(
-                              red: red,
-                              green: green,
-                              blue: blue,
-                            ),
+                            // ColorCode(
+                            //   red: red,
+                            //   green: green,
+                            //   blue: blue,
+                            // ),
                             SolidColorSliders(),
                             ExchangeIcon(),
                             SolidColorTextField(
