@@ -30,12 +30,7 @@ class _SolidColorTextFieldState extends State<SolidColorTextField> {
                 borderSide: BorderSide(color: Colors.white, width: 2)),
             border:
                 OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
-            prefixText: "#  " +
-                widget.red.toRadixString(16) +
-                "" +
-                widget.green.toRadixString(16) +
-                "" +
-                widget.blue.toRadixString(16),
+            prefixText: colorinHex(widget.red, widget.green, widget.blue),
             prefixStyle: TextStyle(color: Colors.white, fontSize: 20),
             suffixIcon: CopyToClipBoardButton(
               red: red.value,
@@ -73,7 +68,7 @@ class _CopyToClipBoardButtonState extends State<CopyToClipBoardButton> {
       ),
       onPressed: () {
         final snackBar = SnackBar(
-          content: Text('Copied Color ' + ' to Clipboard!'),
+          content: Text('Copied Color' + ' to Clipboard!'),
           action: SnackBarAction(
             label: 'DISMISS',
             onPressed: () {
@@ -82,14 +77,29 @@ class _CopyToClipBoardButtonState extends State<CopyToClipBoardButton> {
           ),
         );
         Clipboard.setData(new ClipboardData(
-            text: 'Red: ' +
-                widget.red.toRadixString(16) +
-                ' Green: ' +
-                widget.green.toRadixString(16) +
-                ' Blue: ' +
-                widget.blue.toRadixString(16)));
+            text: colorinHexClipBoard(widget.red, widget.green, widget.blue)));
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
       },
     );
   }
+}
+
+//returns hex colors in string
+String colorinHex(int red, int green, int blue) {
+  return "#  " +
+      red.toRadixString(16) +
+      "" +
+      green.toRadixString(16) +
+      "" +
+      blue.toRadixString(16);
+}
+
+//return hex colors in string for the clipboard
+String colorinHexClipBoard(int red, int green, int blue) {
+  return 'Red: ' +
+      red.toRadixString(16) +
+      ' Green: ' +
+      green.toRadixString(16) +
+      ' Blue: ' +
+      blue.toRadixString(16);
 }
