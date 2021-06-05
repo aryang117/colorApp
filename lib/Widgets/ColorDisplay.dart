@@ -21,8 +21,12 @@ class ColorDisplay extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(5),
           ),
-          color: Color.fromRGBO(red, green, blue, 1),
+          //color: Color.fromRGBO(red, green, blue, 1),
           child: Container(
+            decoration: BoxDecoration(
+              color: Color.fromRGBO(red, green, blue, 1),
+              borderRadius: BorderRadius.all(Radius.circular(5)),
+            ),
             height: 0.5 * screenHeight,
             width: MediaQuery.of(context).size.width,
           ),
