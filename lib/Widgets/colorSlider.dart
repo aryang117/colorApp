@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:colorApp/Screens/solidColor.dart';
+import 'RoundedRectangularThumb.dart';
 
 TextStyle formStyle = new TextStyle(
   fontSize: 20,
@@ -8,133 +9,127 @@ TextStyle formStyle = new TextStyle(
 );
 
 //FOR SOLID COLOR
-//These are the sliders that allow the user to change colors
-class ColorSliders extends StatefulWidget {
+//the sliders that adjust the RGB values of the color
+class SolidColorSliders extends StatefulWidget {
   @override
-  _ColorSlidersState createState() => _ColorSlidersState();
+  _SolidColorSlidersState createState() => _SolidColorSlidersState();
 }
 
-class _ColorSlidersState extends State<ColorSliders> {
+class _SolidColorSlidersState extends State<SolidColorSliders> {
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(left: 20),
       child: Column(
         children: <Widget>[
-          _Sliders(
-            labelTextString: 'R',
-            sliderValue: red.value,
+          RoundedRectangularSliderSolidColor(
+            prefixText: 'R',
+            inactiveTrackColor: Colors.red[200],
+            activeTrackColor: Colors.red[700],
+            thumbColor: Colors.redAccent,
+            value: red.value.toDouble(),
           ),
-          _Sliders(
-            labelTextString: 'G',
-            sliderValue: green.value,
+          RoundedRectangularSliderSolidColor(
+            prefixText: 'G',
+            inactiveTrackColor: Colors.green[200],
+            activeTrackColor: Colors.green[700],
+            thumbColor: Colors.greenAccent[700],
+            value: green.value.toDouble(),
           ),
-          _Sliders(
-            labelTextString: 'B',
-            sliderValue: blue.value,
-          )
+          RoundedRectangularSliderSolidColor(
+            prefixText: 'B',
+            inactiveTrackColor: Colors.blue[200],
+            activeTrackColor: Colors.blue[700],
+            thumbColor: Colors.blueAccent,
+            value: blue.value.toDouble(),
+          ),
         ],
       ),
     );
   }
 }
 
-class _Sliders extends StatefulWidget {
-  @override
-  __SlidersState createState() => __SlidersState();
-
-  const _Sliders(
-      {Key key, @required this.labelTextString, @required this.sliderValue})
+// the sliders are custom and this is their definition
+class RoundedRectangularSliderSolidColor extends StatefulWidget {
+  const RoundedRectangularSliderSolidColor(
+      {Key key,
+      this.prefixText,
+      this.inactiveTrackColor,
+      this.activeTrackColor,
+      this.thumbColor,
+      this.value})
       : super(key: key);
-  final String labelTextString;
-  final int sliderValue;
+
+  final Color inactiveTrackColor;
+  final Color activeTrackColor;
+  final Color thumbColor;
+  final String prefixText;
+  final double value;
+
+  @override
+  _RoundedRectangularSliderSolidColorState createState() =>
+      _RoundedRectangularSliderSolidColorState();
 }
 
-class __SlidersState extends State<_Sliders> {
+class _RoundedRectangularSliderSolidColorState
+    extends State<RoundedRectangularSliderSolidColor> {
+  double rgbValue() {
+    if (this.widget.prefixText.toUpperCase() == 'R')
+      return widget.value;
+    else if (this.widget.prefixText.toUpperCase() == 'G')
+      return this.widget.value;
+    else if (this.widget.prefixText.toUpperCase() == 'B')
+      return this.widget.value;
+
+    return 0;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget>[
-        _SliderTextLabel(
-            labelTextString: widget.labelTextString,
-            sliderValue: widget.sliderValue),
-        Expanded(
-          child: Slider(
-            label: widget.sliderValue.toString(),
-            value: widget.sliderValue.toDouble(),
+    return SliderTheme(
+      data: SliderTheme.of(context).copyWith(
+        activeTrackColor: this.widget.activeTrackColor,
+        inactiveTrackColor: this.widget.inactiveTrackColor,
+        trackShape: RectangularSliderTrackShape(),
+        trackHeight: 4.0,
+        thumbShape: SliderRoundedRectangularThumb(
+            thumbHeight: 40,
+            thumbRadius: 2,
             min: 0,
             max: 255,
-            divisions: 255,
-            onChanged: (double _newvalue) {
-              setState(() {
-                print(_newvalue.toInt());
-                if (widget.labelTextString == 'R')
-                  red.value = _newvalue.toInt();
-                else if (widget.labelTextString == 'G')
-                  green.value = _newvalue.toInt();
-                else if (widget.labelTextString == 'B')
-                  blue.value = _newvalue.toInt();
-              });
-            },
-          ),
+            prefixText: this.widget.prefixText),
+        thumbColor: this.widget.thumbColor,
+        overlayColor: this.widget.activeTrackColor.withAlpha(32),
+        overlayShape: RoundSliderOverlayShape(overlayRadius: 28.0),
+        showValueIndicator: ShowValueIndicator.never,
+        valueIndicatorShape: PaddleSliderValueIndicatorShape(),
+        valueIndicatorColor: Colors.redAccent,
+        valueIndicatorTextStyle: TextStyle(
+          color: Colors.white,
         ),
-      ],
-    );
-  }
-}
-
-class _SliderTextLabel extends StatelessWidget {
-  const _SliderTextLabel(
-      {Key key, @required this.labelTextString, @required this.sliderValue})
-      : super(key: key);
-  final String labelTextString;
-  final int sliderValue;
-  @override
-  Widget build(BuildContext context) {
-    final TextEditingController _controller = TextEditingController(
-      text: sliderValue.toString(),
-    );
-    _controller.value = _controller.value.copyWith(
-        text: sliderValue.toString(),
-        selection:
-            TextSelection.collapsed(offset: sliderValue.toString().length));
-    return Row(
-      children: [
-        Container(
-          padding: new EdgeInsets.only(right: 5),
-          child: Text(
-            labelTextString + ':',
-            style: formStyle,
-          ),
-        ),
-        Container(
-          alignment: Alignment.center,
-          width: 35,
-          height: 40,
-          child: TextField(
-            textAlignVertical: TextAlignVertical.center,
-            style: formStyle,
-            keyboardType: TextInputType.number,
-            controller: _controller,
-            decoration: InputDecoration.collapsed(
-              hintText: '',
-              hintStyle: formStyle,
-              border: UnderlineInputBorder(),
-            ),
-            onChanged: (formValue) {
-              if (int.parse(formValue) > 255) formValue = "255";
-              if (labelTextString == 'R')
-                red.value = int.parse(formValue);
-              else if (labelTextString == 'G')
-                green.value = int.parse(formValue);
-              else if (labelTextString == 'B')
-                blue.value = int.parse(formValue);
-            },
-          ),
-        ),
-      ],
+      ),
+      child: Slider(
+          label: rgbValue().toString(),
+          value: rgbValue(),
+          min: 0,
+          max: 255,
+          divisions: 255,
+          onChanged: (double value) {
+            setState(() {
+              if (this.widget.prefixText == 'R') {
+                red.value = value.toInt();
+                print("red: " + red.value.toString());
+              }
+              if (this.widget.prefixText == 'G') {
+                green.value = value.toInt();
+                print("green: " + green.value.toString());
+              }
+              if (this.widget.prefixText == 'B') {
+                blue.value = value.toInt();
+                print("blue: " + blue.value.toString());
+              }
+            });
+          }),
     );
   }
 }
