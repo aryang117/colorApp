@@ -21,9 +21,13 @@ class _SolidColorTextFieldState extends State<SolidColorTextField> {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
-      child: TextFormField(
+      child: TextField(
+        autofocus: true,
         style: TextStyle(color: Colors.white),
         decoration: InputDecoration(
+            enabled: true,
+            enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.white, width: 2)),
             border:
                 OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
             prefixText: "#  " +
