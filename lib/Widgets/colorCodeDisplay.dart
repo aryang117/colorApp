@@ -12,14 +12,23 @@ class ColorCode extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      "# " +
-          red.toRadixString(16) +
-          green.toRadixString(16) +
-          blue.toRadixString(16),
-      style: new TextStyle(
-          color: Colors.white,
-          fontSize: Theme.of(context).textTheme.headline5.fontSize),
+    return Container(
+      height: 50,
+      padding: new EdgeInsets.symmetric(horizontal: 20),
+      width: MediaQuery.of(context).size.width - 20,
+      child: MaterialButton(
+        color: Color(0xff252525),
+        onPressed: null,
+        child: Text(
+          "# " +
+              red.toRadixString(16) +
+              green.toRadixString(16) +
+              blue.toRadixString(16),
+          style: new TextStyle(
+              color: Colors.white,
+              fontSize: Theme.of(context).textTheme.headline5.fontSize),
+        ),
+      ),
     );
   }
 }
