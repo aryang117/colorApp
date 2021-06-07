@@ -1,3 +1,4 @@
+import 'package:colorApp/Widgets/exchangeIcon.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter/services.dart';
@@ -142,13 +143,7 @@ class _GradientColorState extends State<GradientColor> {
                   ),
 
                   // Visual Indicator between Slider and Text Display
-                  RotatedBox(
-                    quarterTurns: 1,
-                    child: Icon(
-                      Icons.sync_alt,
-                      color: Colors.white,
-                    ),
-                  ),
+                  ExchangeIcon(),
 
                   // Text Field Showing the color's (acc to its index) the color's text value
                   ColorField(
