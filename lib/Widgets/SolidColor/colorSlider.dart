@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:colorApp/Screens/solidColor.dart';
-import 'RoundedRectangularThumb.dart';
+import '../RoundedRectangularThumb.dart';
 
 TextStyle formStyle = new TextStyle(
   fontSize: 20,

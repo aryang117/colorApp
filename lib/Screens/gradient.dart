@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:colorApp/Widgets/colorSaveBoxes.dart'; //redundant, moved all its code here
-import 'package:colorApp/Widgets/colorCodeDisplay.dart'; //redundant, moved all its code here
-import 'package:colorApp/Widgets/GradientColorSliders.dart'; //redundant, moved all its code here
-import 'package:colorApp/Widgets/GradientDisplay.dart';
+import 'package:colorApp/Widgets/SolidColor/colorCodeDisplay.dart'; //redundant, moved all its code here
+import 'package:colorApp/Widgets/Gradient/GradientColorSliders.dart'; //redundant, moved all its code here
+import 'package:colorApp/Widgets/Gradient/GradientDisplay.dart';
 
 import 'package:colorApp/Models/GradientModel.dart';
 import 'package:colorApp/Logic/GradientBloc.dart';

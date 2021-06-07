@@ -2,10 +2,10 @@ import 'package:colorApp/Widgets/exchangeIcon.dart';
 import 'package:flutter/material.dart';
 
 import 'package:colorApp/Widgets/colorSaveBoxes.dart';
-import 'package:colorApp/Widgets/ColorDisplay.dart';
-import 'package:colorApp/Widgets/colorCodeDisplay.dart';
-import 'package:colorApp/Widgets/colorSlider.dart';
-import 'package:colorApp/Widgets/solidColorTextField.dart';
+import 'package:colorApp/Widgets/SolidColor/ColorDisplay.dart';
+import 'package:colorApp/Widgets/SolidColor/colorCodeDisplay.dart';
+import 'package:colorApp/Widgets/SolidColor/colorSlider.dart';
+import 'package:colorApp/Widgets/SolidColor/solidColorTextField.dart';
 
 ValueNotifier<int> red = ValueNotifier<int>(0);
 ValueNotifier<int> green = ValueNotifier<int>(0);
