@@ -1,4 +1,5 @@
 import 'package:colorApp/Screens/gradient.dart';
+import 'package:colorApp/Screens/settings.dart';
 import 'package:colorApp/Screens/solidColor.dart';
 import 'package:flutter/material.dart';
 
@@ -26,7 +27,7 @@ class _HomeState extends State<Home> {
     return [
       SolidColor(),
       GradientColor(),
-      SolidColor(),
+      Settings(),
     ];
   }
 
