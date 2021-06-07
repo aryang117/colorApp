@@ -31,7 +31,7 @@ class _SolidColorTextFieldState extends State<SolidColorTextField> {
             border:
                 OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
             prefixText: colorinHex(widget.red, widget.green, widget.blue),
-            prefixStyle: TextStyle(color: Colors.white, fontSize: 20),
+            prefixStyle: Theme.of(context).textTheme.bodyText1,
             suffixIcon: CopyToClipBoardButton(
               red: red.value,
               green: green.value,

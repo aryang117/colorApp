@@ -1,10 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-TextStyle _settingsOptionsTextStyle =
-    TextStyle(fontSize: 22, color: Colors.white);
 bool _isDarkTheme = true;
-String _dropdownValue = 'Roboto';
+String _dropdownValue;
 
 class Settings extends StatefulWidget {
   const Settings({Key key}) : super(key: key);
@@ -53,10 +52,7 @@ class _DarkThemeSwitchState extends State<DarkThemeSwitch> {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 8),
           ),
-          Text(
-            'Dark Mode',
-            style: _settingsOptionsTextStyle,
-          ),
+          Text('Dark Mode', style: Theme.of(context).textTheme.headline1),
           Spacer(),
           Switch(
             inactiveTrackColor: Color(0xff757575),
@@ -96,11 +92,11 @@ class _DropDownFontSwitcherState extends State<DropDownFontSwitcher> {
           ),
           Text(
             'Font',
-            style: _settingsOptionsTextStyle,
+            style: Theme.of(context).textTheme.headline1,
           ),
           Spacer(),
           Container(
-            width: 120,
+            width: 183,
             decoration: BoxDecoration(
               color: Color(0xff202020),
               borderRadius: BorderRadius.all(Radius.circular(2)),
@@ -127,10 +123,16 @@ class _DropDownFontSwitcherState extends State<DropDownFontSwitcher> {
                   setState(() {
                     _dropdownValue = newValue;
                     print(newValue);
+                    _setFont();
                   });
                 },
-                items: <String>['Nunito', 'Roboto', 'Arial', 'Four']
-                    .map<DropdownMenuItem<String>>((String value) {
+                items: <String>[
+                  'Nunito',
+                  'Lato',
+                  'Poppins',
+                  'Ubuntu Mono',
+                  'Roboto'
+                ].map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
                     child: Text(value),
@@ -143,4 +145,9 @@ class _DropDownFontSwitcherState extends State<DropDownFontSwitcher> {
       ),
     );
   }
+}
+
+_setFont() async {
+  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  await sharedPreferences.setString('font', _dropdownValue);
 }
