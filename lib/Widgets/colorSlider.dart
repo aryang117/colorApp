@@ -18,7 +18,8 @@ class SolidColorSliders extends StatefulWidget {
 class _SolidColorSlidersState extends State<SolidColorSliders> {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Padding(
+      padding: EdgeInsets.only(left: 20),
       child: Column(
         children: <Widget>[
           RoundedRectangularSliderSolidColor(
