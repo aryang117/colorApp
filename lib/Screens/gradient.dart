@@ -191,7 +191,8 @@ class ColorField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
-      child: TextFormField(
+      child: TextField(
+        autofocus: true,
         style: TextStyle(color: Colors.white),
         decoration: InputDecoration(
           border:
