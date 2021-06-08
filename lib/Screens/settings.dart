@@ -14,6 +14,29 @@ class Settings extends StatefulWidget {
 
 class _SettingsState extends State<Settings> {
   @override
+  void initState() {
+    super.initState();
+    _loadInitialDropDownValue();
+    _loadInitialDarkThemeValue();
+  }
+
+  void _loadInitialDropDownValue() async {
+    final sharedPreferences = await SharedPreferences.getInstance();
+
+    setState(() {
+      _dropdownValue = sharedPreferences.getString('font');
+    });
+  }
+
+  void _loadInitialDarkThemeValue() async {
+    final sharedPreferences = await SharedPreferences.getInstance();
+
+    setState(() {
+      _isDarkTheme = sharedPreferences.getBool('theme');
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.fromLTRB(20, 100, 20, 0),
@@ -60,6 +83,8 @@ class _DarkThemeSwitchState extends State<DarkThemeSwitch> {
             onChanged: (bool newValue) {
               setState(() {
                 _isDarkTheme = !_isDarkTheme;
+                print("Chosen theme is dark theme: " + _isDarkTheme.toString());
+                _setTheme();
               });
             },
           ),
@@ -150,4 +175,9 @@ class _DropDownFontSwitcherState extends State<DropDownFontSwitcher> {
 _setFont() async {
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
   await sharedPreferences.setString('font', _dropdownValue);
+}
+
+_setTheme() async {
+  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  await sharedPreferences.setBool('theme', _isDarkTheme);
 }
