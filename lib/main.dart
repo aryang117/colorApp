@@ -23,9 +23,11 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
 
+    // loading on intial load
     loadingFuture = loadingValues();
   }
 
+  // loading user's saved preferences
   Future loadingValues() async {
     await _isLoadingFirstTime();
     await _loadInitialValues();
@@ -35,6 +37,7 @@ class _MyAppState extends State<MyApp> {
     return _getUserTheme.getTheme();
   }
 
+  // if the user opens the app for the first time, these values will be saved
   Future _isLoadingFirstTime() async {
     final sharedPreferences = await SharedPreferences.getInstance();
 
@@ -45,6 +48,7 @@ class _MyAppState extends State<MyApp> {
     }
   }
 
+  // loads values for the font choice and theme choice (dark/light)
   Future _loadInitialValues() async {
     final sharedPreferences = await SharedPreferences.getInstance();
 
