@@ -4,28 +4,64 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'Screens/home.dart';
 
-import 'dart:math';
+String _fontData;
+bool _isDarkTheme;
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+    _isLoadingFirstTime();
+    _loadInitialDropDownValue();
+    _loadInitialDarkThemeValue();
+  }
+
+  void _isLoadingFirstTime() async {
+    final sharedPreferences = await SharedPreferences.getInstance();
+
+    if (!sharedPreferences.containsKey('isDarkTheme') &&
+        !sharedPreferences.containsKey('font')) {
+      sharedPreferences.setString('font', 'Roboto');
+      sharedPreferences.setBool('isDarkTheme', true);
+    }
+  }
+
+  void _loadInitialDropDownValue() async {
+    final sharedPreferences = await SharedPreferences.getInstance();
+
+    setState(() {
+      _fontData = sharedPreferences.getString('font');
+    });
+  }
+
+  void _loadInitialDarkThemeValue() async {
+    final sharedPreferences = await SharedPreferences.getInstance();
+
+    setState(() {
+      _isDarkTheme = sharedPreferences.getBool('isDarkTheme');
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-        future: _getFont(),
-        builder: (context, snapshot) {
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            theme: ThemeData(
-              primaryColor: Colors.blueGrey[50],
-              textTheme: TextTheme(
-                headline1: returnSettingsOptionsTextStyle(snapshot.data),
-                bodyText1: returnColorTextFieldTextStyle(snapshot.data),
-              ),
-            ),
-            home: Home(),
-          );
-        });
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primaryColor: Colors.blueGrey[50],
+        textTheme: TextTheme(
+          headline1: returnSettingsOptionsTextStyle(_fontData),
+          bodyText1: returnColorTextFieldTextStyle(_fontData),
+        ),
+      ),
+      home: Home(),
+    );
   }
 }
 
@@ -55,36 +91,10 @@ TextStyle returnSettingsOptionsTextStyle(String font) {
       return GoogleFonts.lato(fontSize: 22, color: Colors.white);
     case 'Poppins':
       return GoogleFonts.poppins(fontSize: 22, color: Colors.white);
-    case 'Ubuntu':
+    case 'Ubuntu Mono':
       return GoogleFonts.ubuntuMono(fontSize: 22, color: Colors.white);
 
     default:
       return GoogleFonts.roboto(fontSize: 22, color: Colors.white);
-  }
-}
-
-_getFont() async {
-  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-  String font = sharedPreferences.getString('font') ?? "Roboto";
-  print(font);
-  return font;
-}
-
-String randomGen() {
-  var random = Random.secure();
-
-  int value = random.nextInt(5);
-
-  switch (value) {
-    case 1:
-      return 'Nunito';
-    case 2:
-      return 'Lato';
-    case 3:
-      return 'Poppins';
-    case 4:
-      return 'Ubuntu Mono';
-    default:
-      return 'Roboto';
   }
 }
