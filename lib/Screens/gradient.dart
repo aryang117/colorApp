@@ -285,18 +285,16 @@ double _redValue = 0;
 double _greenValue = 0;
 double _blueValue = 0;
 
-//
+// Sliders for adjusting RGB values of the colors
 class GradientColorSliders extends StatefulWidget {
   GradientColorSliders({
     Key key,
     @required this.gradientBloc,
     @required this.snapshot,
-    //@required this.gradientColor,
   }) : super(key: key);
 
   final GradientBloc gradientBloc;
   final AsyncSnapshot snapshot;
-  //final GradientColor gradientColor;
 
   @override
   _GradientColorSlidersState createState() => _GradientColorSlidersState();
