@@ -28,8 +28,7 @@ class _MyAppState extends State<MyApp> {
 
   Future loadingValues() async {
     await _isLoadingFirstTime();
-    await _loadInitialDropDownValue();
-    await _loadInitialDarkThemeValue();
+    await _loadInitialValues();
 
     _getUserTheme = GetUserTheme(font: _fontData, isDarkTheme: _isDarkTheme);
 
@@ -46,18 +45,11 @@ class _MyAppState extends State<MyApp> {
     }
   }
 
-  Future _loadInitialDropDownValue() async {
+  Future _loadInitialValues() async {
     final sharedPreferences = await SharedPreferences.getInstance();
 
     setState(() {
       _fontData = sharedPreferences.getString('font');
-    });
-  }
-
-  Future _loadInitialDarkThemeValue() async {
-    final sharedPreferences = await SharedPreferences.getInstance();
-
-    setState(() {
       _isDarkTheme = sharedPreferences.getBool('isDarkTheme');
       print(_isDarkTheme.toString() + _fontData);
     });
