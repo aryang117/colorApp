@@ -153,20 +153,6 @@ class _GradientColorState extends State<GradientColor> {
 }
 
 // the textfield at the bottom that display the color's hex values
-// BROKEN, COLORTEXTIELD and COLORFIELD
-class ColorTextField extends StatefulWidget {
-  @override
-  _ColorTextFieldState createState() => _ColorTextFieldState();
-}
-
-class _ColorTextFieldState extends State<ColorTextField> {
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}
-
-//broken, should be replaced with colortextfield
 class ColorField extends StatelessWidget {
   ColorField(
       {Key key, @required this.red, @required this.blue, @required this.green})
@@ -275,11 +261,6 @@ class _ColorSelectorButtonsState extends State<ColorSelectorButtons> {
     );
   }
 }
-
-TextStyle formStyle = new TextStyle(
-  fontSize: 20,
-  color: Colors.white,
-);
 
 double _redValue = 0;
 double _greenValue = 0;
