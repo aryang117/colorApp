@@ -25,18 +25,19 @@ class _SolidColorTextFieldState extends State<SolidColorTextField> {
         autofocus: true,
         style: TextStyle(color: Colors.white),
         decoration: InputDecoration(
-            enabled: true,
-            enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.white, width: 2)),
-            border:
-                OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
-            prefixText: colorinHex(widget.red, widget.green, widget.blue),
-            prefixStyle: Theme.of(context).textTheme.bodyText1,
-            suffixIcon: CopyToClipBoardButton(
-              red: red.value,
-              green: green.value,
-              blue: blue.value,
-            )),
+          enabled: true,
+          enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.white, width: 2)),
+          border:
+              OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
+          prefixText: colorinHex(widget.red, widget.green, widget.blue),
+          prefixStyle: Theme.of(context).textTheme.bodyText1,
+          suffixIcon: CopyToClipBoardButton(
+            red: red.value,
+            green: green.value,
+            blue: blue.value,
+          ),
+        ),
         keyboardType: TextInputType.number,
         maxLength: 6,
         readOnly: true,
@@ -62,9 +63,11 @@ class _CopyToClipBoardButtonState extends State<CopyToClipBoardButton> {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      icon: Icon(
-        Icons.copy_rounded,
-        color: Colors.white,
+      icon: IconTheme(
+        data: Theme.of(context).iconTheme,
+        child: Icon(
+          Icons.copy_rounded,
+        ),
       ),
       onPressed: () {
         final snackBar = SnackBar(

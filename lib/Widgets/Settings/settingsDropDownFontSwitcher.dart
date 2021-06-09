@@ -36,9 +36,11 @@ class _DropDownFontSwitcherState extends State<DropDownFontSwitcher> {
       height: 40,
       child: Row(
         children: [
-          Icon(
-            Icons.font_download_outlined,
-            color: Colors.white,
+          IconTheme(
+            data: Theme.of(context).iconTheme,
+            child: Icon(
+              Icons.font_download_outlined,
+            ),
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 8),
@@ -51,7 +53,8 @@ class _DropDownFontSwitcherState extends State<DropDownFontSwitcher> {
           Container(
             width: 183,
             decoration: BoxDecoration(
-              color: Color(0xff202020),
+              color: Theme.of(context).canvasColor,
+              border: Border.all(color: Theme.of(context).canvasColor),
               borderRadius: BorderRadius.all(Radius.circular(2)),
             ),
             child: Center(
@@ -66,11 +69,10 @@ class _DropDownFontSwitcherState extends State<DropDownFontSwitcher> {
                 ),
                 iconSize: 24,
                 elevation: 16,
-                style: const TextStyle(color: Colors.white, fontSize: 18),
-                dropdownColor: Color(0xff212121),
+                style: Theme.of(context).textTheme.headline6,
                 underline: Container(
                   height: 2,
-                  color: Color(0xff212121),
+                  color: Theme.of(context).canvasColor,
                 ),
                 onChanged: (String newValue) {
                   setState(() {

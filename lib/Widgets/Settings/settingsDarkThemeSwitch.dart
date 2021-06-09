@@ -36,9 +36,11 @@ class _DarkThemeSwitchState extends State<DarkThemeSwitch> {
       height: 40,
       child: Row(
         children: [
-          Icon(
-            Icons.nightlight_outlined,
-            color: Colors.white,
+          IconTheme(
+            data: Theme.of(context).iconTheme,
+            child: Icon(
+              Icons.nightlight_outlined,
+            ),
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 8),

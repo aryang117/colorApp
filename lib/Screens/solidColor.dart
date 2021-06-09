@@ -32,7 +32,7 @@ class SolidColor extends StatelessWidget {
                     child: null,
                     builder: (context, int red, child) {
                       return Scaffold(
-                        backgroundColor: Color(0xff181818),
+                        backgroundColor: Theme.of(context).backgroundColor,
                         body: SingleChildScrollView(
                           child: Column(children: <Widget>[
                             ColorDisplay(red: red, blue: blue, green: green),

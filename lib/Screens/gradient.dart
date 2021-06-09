@@ -13,12 +13,6 @@ import 'package:colorApp/Logic/GradientBloc.dart';
 
 import 'package:colorApp/Widgets/RoundedRectangularThumb.dart';
 
-TextStyle colorHexStyle = new TextStyle(
-  fontSize: 14,
-  color: Colors.white,
-  fontWeight: FontWeight.w600,
-);
-
 //index for different colors
 ValueNotifier<int> _index = ValueNotifier(0);
 
@@ -47,7 +41,7 @@ class _GradientColorState extends State<GradientColor> {
     //double screenheight = MediaQuery.of(context).size.height; - not using anymore, will be removed in future
 
     return Scaffold(
-      backgroundColor: Color(0xff181818),
+      backgroundColor: Theme.of(context).backgroundColor,
 
       //Using the bloc model for Gradient which refreshes value for the colors after change
       body: StreamBuilder<List<GradientModel>>(
@@ -198,9 +192,11 @@ class ColorField extends StatelessWidget {
               green.toRadixString(16) +
               "" +
               blue.toRadixString(16),
-          prefixStyle: TextStyle(color: Colors.white, fontSize: 20),
+          prefixStyle: Theme.of(context).textTheme.bodyText1,
           suffixIcon: IconButton(
-            icon: Icon(Icons.copy_rounded),
+            icon: IconTheme(
+                data: Theme.of(context).iconTheme,
+                child: Icon(Icons.copy_rounded)),
             onPressed: () {
               final snackBar = SnackBar(
                 content: Text('Copied Color ' +
@@ -245,19 +241,27 @@ class ColorSelectorButtons extends StatefulWidget {
 
 class _ColorSelectorButtonsState extends State<ColorSelectorButtons> {
   bool _isPressed = false;
+
+  Color _materialButtonColor() {
+    return (Theme.of(context).buttonColor == Colors.white)
+        ? (_isPressed && (_index.value == this.widget.index)
+            ? Color(0xff252525)
+            : Color(0xff303030))
+        : (_isPressed && (_index.value == this.widget.index)
+            ? Color(0xfff0f0f0)
+            : Color(0xfffafafa));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 50,
       width: (MediaQuery.of(context).size.width + 8) / 5,
-      //color: Color(0xff252525),
       child: MaterialButton(
-        color: _isPressed && (_index.value == this.widget.index)
-            ? Color(0xff252525)
-            : Color(0xff303030),
+        color: _materialButtonColor(),
         child: Text(
           this.widget.colorHex,
-          style: colorHexStyle,
+          style: Theme.of(context).textTheme.button,
         ),
         onPressed: () {
           setState(() {
@@ -428,7 +432,8 @@ class _RoundedRectangularSliderGradientState
             thumbRadius: 2,
             min: 0,
             max: 255,
-            prefixText: this.widget.prefixText),
+            prefixText: this.widget.prefixText,
+            thumbTextStyle: Theme.of(context).textTheme.bodyText2),
         thumbColor: this.widget.thumbColor,
         overlayColor: this.widget.activeTrackColor.withAlpha(32),
         overlayShape: RoundSliderOverlayShape(overlayRadius: 28.0),

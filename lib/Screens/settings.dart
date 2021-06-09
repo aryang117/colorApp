@@ -7,17 +7,19 @@ class Settings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.fromLTRB(20, 100, 20, 0),
-      color: Color(0xff181818),
-      child: Column(
-        children: [
-          DarkThemeSwitch(),
-          Padding(
-            padding: EdgeInsets.only(top: 15, bottom: 15),
-          ),
-          DropDownFontSwitcher(),
-        ],
+    return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
+      body: Container(
+        padding: EdgeInsets.fromLTRB(20, 100, 20, 0),
+        child: Column(
+          children: [
+            DarkThemeSwitch(),
+            Padding(
+              padding: EdgeInsets.only(top: 15, bottom: 15),
+            ),
+            DropDownFontSwitcher(),
+          ],
+        ),
       ),
     );
   }

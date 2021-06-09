@@ -37,19 +37,22 @@ class _HomeState extends State<Home> {
       PersistentBottomNavBarItem(
         icon: Icon(Icons.check_box_outline_blank),
         title: ("Solid"),
-        activeColor: Colors.white,
+        activeColor:
+            Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
         inactiveColor: Colors.grey,
       ),
       PersistentBottomNavBarItem(
         icon: Icon(Icons.gradient),
         title: ("Gradient"),
-        activeColor: Colors.white,
+        activeColor:
+            Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
         inactiveColor: Colors.grey,
       ),
       PersistentBottomNavBarItem(
         icon: Icon(Icons.settings),
         title: ("Settings"),
-        activeColor: Colors.white,
+        activeColor:
+            Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
         inactiveColor: Colors.grey,
       ),
     ];
@@ -64,7 +67,8 @@ class _HomeState extends State<Home> {
         items:
             _navBarsItems(), // Redundant here but defined to demonstrate for other than custom style
         confineInSafeArea: true,
-        backgroundColor: Color(0xff282828),
+        backgroundColor:
+            Theme.of(context).bottomNavigationBarTheme.backgroundColor,
         handleAndroidBackButtonPress: true,
         onItemSelected: (int) {
           setState(

@@ -10,9 +10,11 @@ class ExchangeIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return RotatedBox(
       quarterTurns: 1,
-      child: Icon(
-        Icons.sync_alt,
-        color: Colors.white,
+      child: IconTheme(
+        data: Theme.of(context).iconTheme,
+        child: Icon(
+          Icons.sync_alt,
+        ),
       ),
     );
   }

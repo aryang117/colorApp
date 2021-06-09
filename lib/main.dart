@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'package:colorApp/themes.dart';
 import 'Screens/home.dart';
 
 String _fontData;
 bool _isDarkTheme;
+
+GetUserTheme _getUserTheme;
+Future loadingFuture;
 
 void main() => runApp(MyApp());
 
@@ -18,12 +22,21 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    _isLoadingFirstTime();
-    _loadInitialDropDownValue();
-    _loadInitialDarkThemeValue();
+
+    loadingFuture = loadingValues();
   }
 
-  void _isLoadingFirstTime() async {
+  Future loadingValues() async {
+    await _isLoadingFirstTime();
+    await _loadInitialDropDownValue();
+    await _loadInitialDarkThemeValue();
+
+    _getUserTheme = GetUserTheme(font: _fontData, isDarkTheme: _isDarkTheme);
+
+    return _getUserTheme.getTheme();
+  }
+
+  Future _isLoadingFirstTime() async {
     final sharedPreferences = await SharedPreferences.getInstance();
 
     if (!sharedPreferences.containsKey('isDarkTheme') &&
@@ -33,7 +46,7 @@ class _MyAppState extends State<MyApp> {
     }
   }
 
-  void _loadInitialDropDownValue() async {
+  Future _loadInitialDropDownValue() async {
     final sharedPreferences = await SharedPreferences.getInstance();
 
     setState(() {
@@ -41,60 +54,26 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-  void _loadInitialDarkThemeValue() async {
+  Future _loadInitialDarkThemeValue() async {
     final sharedPreferences = await SharedPreferences.getInstance();
 
     setState(() {
       _isDarkTheme = sharedPreferences.getBool('isDarkTheme');
+      print(_isDarkTheme.toString() + _fontData);
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primaryColor: Colors.blueGrey[50],
-        textTheme: TextTheme(
-          headline1: returnSettingsOptionsTextStyle(_fontData),
-          bodyText1: returnColorTextFieldTextStyle(_fontData),
-        ),
-      ),
-      home: Home(),
+    return FutureBuilder(
+      future: loadingFuture,
+      builder: (context, snapshot) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: snapshot.data,
+          home: Home(),
+        );
+      },
     );
-  }
-}
-
-// Solid and Gradient Color Text Field (Hex) text styles
-TextStyle returnColorTextFieldTextStyle(String font) {
-  switch (font) {
-    case 'Nunito':
-      return GoogleFonts.nunito(color: Colors.white, fontSize: 20);
-    case 'Lato':
-      return GoogleFonts.lato(color: Colors.white, fontSize: 20);
-    case 'Poppins':
-      return GoogleFonts.poppins(color: Colors.white, fontSize: 20);
-    case 'Ubuntu Mono':
-      return GoogleFonts.ubuntuMono(color: Colors.white, fontSize: 20);
-
-    default:
-      return GoogleFonts.roboto(color: Colors.white, fontSize: 20);
-  }
-}
-
-// Settings Options (labels) text styles text styles
-TextStyle returnSettingsOptionsTextStyle(String font) {
-  switch (font) {
-    case 'Nunito':
-      return GoogleFonts.nunito(fontSize: 22, color: Colors.white);
-    case 'Lato':
-      return GoogleFonts.lato(fontSize: 22, color: Colors.white);
-    case 'Poppins':
-      return GoogleFonts.poppins(fontSize: 22, color: Colors.white);
-    case 'Ubuntu Mono':
-      return GoogleFonts.ubuntuMono(fontSize: 22, color: Colors.white);
-
-    default:
-      return GoogleFonts.roboto(fontSize: 22, color: Colors.white);
   }
 }

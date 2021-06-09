@@ -8,12 +8,14 @@ class SliderRoundedRectangularThumb extends SliderComponentShape {
     this.min,
     this.max,
     this.prefixText = ' ',
+    @required this.thumbTextStyle,
   });
   final double thumbRadius;
   final thumbHeight;
   final int min;
   final int max;
   final String prefixText;
+  final TextStyle thumbTextStyle;
 
   @override
   Size getPreferredSize(bool isEnabled, bool isDiscrete) {
@@ -48,7 +50,7 @@ class SliderRoundedRectangularThumb extends SliderComponentShape {
       ..style = PaintingStyle.fill;
 
     TextSpan span = new TextSpan(
-        style: new TextStyle(
+        style: thumbTextStyle.copyWith(
             fontSize: thumbHeight * .3,
             fontWeight: FontWeight.w700,
             color: sliderTheme.thumbColor,
