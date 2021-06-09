@@ -269,7 +269,6 @@ class _ColorSelectorButtonsState extends State<ColorSelectorButtons> {
             print("_index : " + _index.value.toString());
             GradientColor();
             _isPressed = !_isPressed;
-            if (!_isPressed) _index.value = 0;
           });
         },
       ),
