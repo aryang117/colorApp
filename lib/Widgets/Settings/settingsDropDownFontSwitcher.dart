@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 String _dropdownValue;
 
+// this switch let's users change fonts; changes reflects on reopening the app
 class DropDownFontSwitcher extends StatefulWidget {
   const DropDownFontSwitcher({Key key}) : super(key: key);
 
@@ -14,9 +15,12 @@ class _DropDownFontSwitcherState extends State<DropDownFontSwitcher> {
   @override
   void initState() {
     super.initState();
+
+    // loads the value of the theme (light / dark) whenever this widget is built
     _loadInitialDropDownValue();
   }
 
+  // loads the value of the font of user's choice
   void _loadInitialDropDownValue() async {
     final sharedPreferences = await SharedPreferences.getInstance();
 
@@ -25,6 +29,7 @@ class _DropDownFontSwitcherState extends State<DropDownFontSwitcher> {
     });
   }
 
+  // this saves the value of user's choice of theme
   _setFont() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     await sharedPreferences.setString('font', _dropdownValue);

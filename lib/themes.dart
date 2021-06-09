@@ -7,10 +7,12 @@ class GetUserTheme {
   String font;
   bool isDarkTheme;
 
+  // the only publicly accessible method of this class that returns the theme to be use
   ThemeData getTheme() {
     return _makeTheme(font);
   }
 
+  // it makes the theme but is NOT publicly accessible
   ThemeData _makeTheme(String font) {
     return ThemeData(
         backgroundColor: _returnBackgroundColor(),

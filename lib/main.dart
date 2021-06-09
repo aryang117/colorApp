@@ -29,9 +29,11 @@ class _MyAppState extends State<MyApp> {
 
   // loading user's saved preferences
   Future loadingValues() async {
+    // waiting for the values to load
     await _isLoadingFirstTime();
     await _loadInitialValues();
 
+    // initializing the GetUserTheme Class
     _getUserTheme = GetUserTheme(font: _fontData, isDarkTheme: _isDarkTheme);
 
     return _getUserTheme.getTheme();

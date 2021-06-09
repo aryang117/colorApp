@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 bool _isDarkTheme;
 
+// this switch let's users switch between dark and light theme; changes reflects on reopening the app
 class DarkThemeSwitch extends StatefulWidget {
   const DarkThemeSwitch({Key key}) : super(key: key);
 
@@ -14,9 +15,12 @@ class _DarkThemeSwitchState extends State<DarkThemeSwitch> {
   @override
   void initState() {
     super.initState();
+
+    // loads the value of the theme (light / dark) whenever this widget is built
     _loadInitialDarkThemeValue();
   }
 
+  // loads the value of the theme of user's choice
   void _loadInitialDarkThemeValue() async {
     final sharedPreferences = await SharedPreferences.getInstance();
 
@@ -25,6 +29,7 @@ class _DarkThemeSwitchState extends State<DarkThemeSwitch> {
     });
   }
 
+  // this saves the value of user's choice of theme
   _setTheme() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     await sharedPreferences.setBool('isDarkTheme', _isDarkTheme);
