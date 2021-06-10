@@ -17,6 +17,13 @@ const Color _lightThemeIconTheme = Colors.blue;
 const Color _darkThemeMaterialButtonTextColor = Colors.white;
 const Color _lightThemeMaterialButtonTextColor = Colors.black;
 
+// variables for each font size
+const int _roundedRectThumbFontSize = 18;
+const int _materialButtonFontSize = 14;
+const int _settingsOptionsFontSize = 22;
+const int _dropDownButtonFontSize = 18;
+const int _colorTextFieldFontSize = 20;
+
 class GetUserTheme {
   GetUserTheme({@required this.font, @required this.isDarkTheme});
 
@@ -33,11 +40,20 @@ class GetUserTheme {
     return ThemeData(
         backgroundColor: _returnBackgroundColor(),
         textTheme: TextTheme(
-          headline1: _returnSettingsOptionsTextStyle(),
-          headline6: _dropdownButtonTextStyle(),
-          bodyText1: _returnColorTextFieldTextStyle(),
-          bodyText2: _returnRoundedRectThumbTextStyle(),
-          button: _returnMaterialButtonTextTheme(),
+          // Settings Options (labels) text styles text styles
+          headline1: _fontMaker(_settingsOptionsFontSize),
+
+          // Text Theme for the drop down button
+          headline6: _fontMaker(_dropDownButtonFontSize),
+
+          // Solid and Gradient Color Text Field (Hex) text styles
+          bodyText1: _fontMaker(_colorTextFieldFontSize),
+
+          // Text Style for Rounded Rectangular Thumb used in the Sliders
+          bodyText2: _fontMaker(_roundedRectThumbFontSize),
+
+          // Text Theme for the material button in the gradient color selector buttons text
+          button: _fontMaker(_materialButtonFontSize),
         ),
         iconTheme: _returnIconTheme(),
         buttonColor: _returnMaterialButtonThemeColor(),
@@ -61,29 +77,29 @@ class GetUserTheme {
     );
   }
 
-  // Text Style for Rounded Rectangular Thumb used in the Sliders
-  TextStyle _returnRoundedRectThumbTextStyle() {
+  // return textStyle for different textthemes
+  TextStyle _fontMaker(int _fontSize) {
     switch (font) {
       case 'Nunito':
         return GoogleFonts.nunito(
-            fontSize: 18,
+            fontSize: _fontSize.toDouble(),
             color: isDarkTheme ? _darkThemeFontColor : _lightThemeFontColor);
       case 'Lato':
         return GoogleFonts.lato(
-            fontSize: 18,
+            fontSize: _fontSize.toDouble(),
             color: isDarkTheme ? _darkThemeFontColor : _lightThemeFontColor);
       case 'Poppins':
         return GoogleFonts.poppins(
-            fontSize: 18,
+            fontSize: _fontSize.toDouble(),
             color: isDarkTheme ? _darkThemeFontColor : _lightThemeFontColor);
       case 'Ubuntu Mono':
         return GoogleFonts.ubuntuMono(
-            fontSize: 18,
+            fontSize: _fontSize.toDouble(),
             color: isDarkTheme ? _darkThemeFontColor : _lightThemeFontColor);
 
       default:
         return GoogleFonts.roboto(
-            fontSize: 18,
+            fontSize: _fontSize.toDouble(),
             color: isDarkTheme ? _darkThemeFontColor : _lightThemeFontColor);
     }
   }
@@ -93,33 +109,6 @@ class GetUserTheme {
     return !isDarkTheme
         ? _lightThemeDropDownMenuBackground
         : _darkThemeDropDownMenuBackground;
-  }
-
-  // Text Theme for the drop down button
-  TextStyle _dropdownButtonTextStyle() {
-    switch (font) {
-      case 'Nunito':
-        return GoogleFonts.nunito(
-            fontSize: 18,
-            color: isDarkTheme ? _darkThemeFontColor : _lightThemeFontColor);
-      case 'Lato':
-        return GoogleFonts.lato(
-            fontSize: 18,
-            color: isDarkTheme ? _darkThemeFontColor : _lightThemeFontColor);
-      case 'Poppins':
-        return GoogleFonts.poppins(
-            fontSize: 18,
-            color: isDarkTheme ? _darkThemeFontColor : _lightThemeFontColor);
-      case 'Ubuntu Mono':
-        return GoogleFonts.ubuntuMono(
-            fontSize: 18,
-            color: isDarkTheme ? _darkThemeFontColor : _lightThemeFontColor);
-
-      default:
-        return GoogleFonts.roboto(
-            fontSize: 18,
-            color: isDarkTheme ? _darkThemeFontColor : _lightThemeFontColor);
-    }
   }
 
   // Theme for the icons
@@ -133,86 +122,5 @@ class GetUserTheme {
     return isDarkTheme
         ? _darkThemeMaterialButtonTextColor
         : _lightThemeMaterialButtonTextColor;
-  }
-
-  // Text Theme for the material button in the gradient color selector buttons text
-  TextStyle _returnMaterialButtonTextTheme() {
-    switch (font) {
-      case 'Nunito':
-        return GoogleFonts.nunito(
-            fontSize: 14,
-            color: isDarkTheme ? _darkThemeFontColor : _lightThemeFontColor);
-      case 'Lato':
-        return GoogleFonts.lato(
-            fontSize: 14,
-            color: isDarkTheme ? _darkThemeFontColor : _lightThemeFontColor);
-      case 'Poppins':
-        return GoogleFonts.poppins(
-            fontSize: 14,
-            color: isDarkTheme ? _darkThemeFontColor : _lightThemeFontColor);
-      case 'Ubuntu Mono':
-        return GoogleFonts.ubuntuMono(
-            fontSize: 14,
-            color: isDarkTheme ? _darkThemeFontColor : _lightThemeFontColor);
-
-      default:
-        return GoogleFonts.roboto(
-            fontSize: 14,
-            color: isDarkTheme ? _darkThemeFontColor : _lightThemeFontColor);
-    }
-  }
-
-// Solid and Gradient Color Text Field (Hex) text styles
-  TextStyle _returnColorTextFieldTextStyle() {
-    switch (font) {
-      case 'Nunito':
-        return GoogleFonts.nunito(
-            fontSize: 20,
-            color: isDarkTheme ? _darkThemeFontColor : _lightThemeFontColor);
-      case 'Lato':
-        return GoogleFonts.lato(
-            fontSize: 20,
-            color: isDarkTheme ? _darkThemeFontColor : _lightThemeFontColor);
-      case 'Poppins':
-        return GoogleFonts.poppins(
-            fontSize: 20,
-            color: isDarkTheme ? _darkThemeFontColor : _lightThemeFontColor);
-      case 'Ubuntu Mono':
-        return GoogleFonts.ubuntuMono(
-            fontSize: 20,
-            color: isDarkTheme ? _darkThemeFontColor : _lightThemeFontColor);
-
-      default:
-        return GoogleFonts.roboto(
-            fontSize: 20,
-            color: isDarkTheme ? _darkThemeFontColor : _lightThemeFontColor);
-    }
-  }
-
-// Settings Options (labels) text styles text styles
-  TextStyle _returnSettingsOptionsTextStyle() {
-    switch (font) {
-      case 'Nunito':
-        return GoogleFonts.nunito(
-            fontSize: 22,
-            color: isDarkTheme ? _darkThemeFontColor : _lightThemeFontColor);
-      case 'Lato':
-        return GoogleFonts.lato(
-            fontSize: 22,
-            color: isDarkTheme ? _darkThemeFontColor : _lightThemeFontColor);
-      case 'Poppins':
-        return GoogleFonts.poppins(
-            fontSize: 22,
-            color: isDarkTheme ? _darkThemeFontColor : _lightThemeFontColor);
-      case 'Ubuntu Mono':
-        return GoogleFonts.ubuntuMono(
-            fontSize: 22,
-            color: isDarkTheme ? _darkThemeFontColor : _lightThemeFontColor);
-
-      default:
-        return GoogleFonts.roboto(
-            fontSize: 22,
-            color: isDarkTheme ? _darkThemeFontColor : _lightThemeFontColor);
-    }
   }
 }
