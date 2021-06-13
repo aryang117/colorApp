@@ -8,6 +8,10 @@ Using this app you can create -
 - Amazing Gradients with upto 4 different colors for the same gradient
 - Modify and Save Preferences for different fonts and choose you favorite theme (dark and light)
 
+## Preview GIFS and ScreenShots
+![SolidColor] (/ssGifs/gradientSS.png)
+![Gradient] (https://raw.githubusercontent.com/Trolled00Gamer/colorApp/dev/ssGifs/gradientSS.png?token=AG6STAZ4ZZMYGOGJS6SIZFDAYXTE4)
+
 ## Modules
 This section talks about the different modules about the app and how I worked on them
 
