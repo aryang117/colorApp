@@ -9,8 +9,13 @@ Using this app you can create -
 - Modify and Save Preferences for different fonts and choose you favorite theme (dark and light)
 
 ## Preview GIFS and ScreenShots
-![SolidColor] (/ssGifs/gradientSS.png)
-![Gradient] (https://raw.githubusercontent.com/Trolled00Gamer/colorApp/dev/ssGifs/gradientSS.png?token=AG6STAZ4ZZMYGOGJS6SIZFDAYXTE4)
+<div>
+<img src="/ssGifs/solidColorSS.png" alt="solidColor" width="25%" height="25%"/>
+ 
+<img src="/ssGifs/gradientSS.png" alt="Gradient" width="25%" height="25%"/>
+ 
+<img src="/ssGifs/SettingsGif.gif" alt="Settings" width="25%" height="25%"/>
+</div>
 
 ## Modules
 This section talks about the different modules about the app and how I worked on them
