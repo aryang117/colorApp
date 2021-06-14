@@ -8,7 +8,13 @@ Using this app you can create -
 - Modify and Save Preferences for different fonts and choose you favorite theme (dark and light)
 
 ## Building the Project
-To build this project, please make sure that you have flutter installed and once you're ready, navigate to the Project root directory and run ``flutter run`` command in your terminal or, you can use your preferred Editor for the same as well.
+To build this project, please make sure that you have flutter installed and once you're ready, 
+- navigate to the Project root directory and,
+- run ``flutter run`` command in your terminal 
+
+ OR,
+
+ you can use your preferred Editor.
 
 ## Preview GIFS and ScreenShots
 <div>
