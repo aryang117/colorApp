@@ -12,9 +12,9 @@ To build this project, please make sure that you have flutter installed and once
 
 ## Preview GIFS and ScreenShots
 <div>
-<img src="/ssGifs/solidColorSS.png" alt="solidColor" width="25%" height="25%"/>
+<img src="/ssGifs/SolidColorGIF.gif" alt="solidColor" width="25%" height="25%"/>
  
-<img src="/ssGifs/gradientSS.png" alt="Gradient" width="25%" height="25%"/>
+<img src="/ssGifs/gradientGif.gif" alt="Gradient" width="25%" height="25%"/>
  
 <img src="/ssGifs/SettingsGif.gif" alt="Settings" width="25%" height="25%"/>
 </div>
