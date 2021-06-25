@@ -15,10 +15,7 @@ ValueNotifier<int> blue = ValueNotifier<int>(0);
 class SolidColor extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    double screenheight = MediaQuery.of(context).size.height;
-
 //ValueListenable listens to green, blue and red values (modified by color sliders) and changes are reflected real-time
-//ALso, Bad Code Should be replaced
     return ValueListenableBuilder(
         valueListenable: green,
         child: null,
