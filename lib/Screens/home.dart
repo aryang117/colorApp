@@ -5,16 +5,13 @@ import 'package:flutter/material.dart';
 
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
-//home class, contains bottom nav bar (whose Ist item is the screen displayed by default)
+//home class, contains bottom nav bar (Ist item is the default screen)
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
-  int i = 0;
-  int abc = 0xffffffff;
-
   PersistentTabController _controller;
 
   @override
@@ -64,18 +61,14 @@ class _HomeState extends State<Home> {
     return PersistentTabView(
         controller: _controller,
         screens: _buildScreens(),
-        items:
-            _navBarsItems(), // Redundant here but defined to demonstrate for other than custom style
+        items: _navBarsItems(),
         confineInSafeArea: true,
         backgroundColor:
             Theme.of(context).bottomNavigationBarTheme.backgroundColor,
         handleAndroidBackButtonPress: true,
         onItemSelected: (int) {
-          setState(
-              () {}); // This is required to update the nav bar if Android back button is pressed
+          setState(() {});
         },
-        navBarStyle:
-            NavBarStyle.style12 // Choose the nav bar style with this property
-        );
+        navBarStyle: NavBarStyle.style12);
   }
 }
