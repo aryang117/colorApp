@@ -34,8 +34,6 @@ class _GradientColorState extends State<GradientColor> {
 
   @override
   Widget build(BuildContext context) {
-    //double screenheight = MediaQuery.of(context).size.height; - not using anymore, will be removed in future
-
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
 
@@ -64,67 +62,7 @@ class _GradientColorState extends State<GradientColor> {
                     color3: snapshot.data[2],
                     color4: snapshot.data[3],
                   ),
-                  Container(
-                    width: MediaQuery.of(context).size.width - 20,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        ColorSelectorButtons(
-                          index: 0,
-                          colorHex: colorHexMaker(
-                            snapshot.data[0].red,
-                            snapshot.data[0].green,
-                            snapshot.data[0].blue,
-                          ),
-                        ),
-                        ColorSelectorButtons(
-                          index: 1,
-                          colorHex: colorHexMaker(
-                            snapshot.data[1].red,
-                            snapshot.data[1].green,
-                            snapshot.data[1].blue,
-                          ),
-                        ),
-                        ColorSelectorButtons(
-                          index: 2,
-                          colorHex: colorHexMaker(
-                            snapshot.data[2].red,
-                            snapshot.data[2].green,
-                            snapshot.data[2].blue,
-                          ),
-                        ),
-                        ColorSelectorButtons(
-                          index: 3,
-                          colorHex: colorHexMaker(
-                            snapshot.data[3].red,
-                            snapshot.data[3].green,
-                            snapshot.data[3].blue,
-                          ),
-                        ),
-
-                        //Bloc Model doesn't refresh data automatically
-                        //(the data is a 2D list, but only elements are modified NOT the WHOLE 2D List, so BLoC doesn't refresh it automatically)
-                        // this setState refreshes the whole widget
-                        Container(
-                          width: (MediaQuery.of(context).size.width - 132) / 5,
-                          height: 50,
-                          child: MaterialButton(
-                            color: Color(0xff00a35a),
-                            onPressed: () {
-                              setState(() {
-                                print('widget reload');
-                              });
-                            },
-                            child: Icon(
-                              Icons.replay,
-                              size: 22,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                  _gradientColorSelectorRow(snapshot),
 
                   //the sliders that allow a color's RGB to be changed
                   GradientColorSliders(
@@ -144,6 +82,73 @@ class _GradientColorState extends State<GradientColor> {
               );
             }
           }),
+    );
+  }
+
+  Widget _gradientColorSelectorRow(AsyncSnapshot snapshot) {
+    return Container(
+      width: MediaQuery.of(context).size.width - 20,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          ColorSelectorButtons(
+            index: 0,
+            colorHex: colorHexMaker(
+              snapshot.data[0].red,
+              snapshot.data[0].green,
+              snapshot.data[0].blue,
+            ),
+          ),
+          ColorSelectorButtons(
+            index: 1,
+            colorHex: colorHexMaker(
+              snapshot.data[1].red,
+              snapshot.data[1].green,
+              snapshot.data[1].blue,
+            ),
+          ),
+          ColorSelectorButtons(
+            index: 2,
+            colorHex: colorHexMaker(
+              snapshot.data[2].red,
+              snapshot.data[2].green,
+              snapshot.data[2].blue,
+            ),
+          ),
+          ColorSelectorButtons(
+            index: 3,
+            colorHex: colorHexMaker(
+              snapshot.data[3].red,
+              snapshot.data[3].green,
+              snapshot.data[3].blue,
+            ),
+          ),
+          _gradientColorReloadButton(),
+        ],
+      ),
+    );
+  }
+
+  //Bloc Model doesn't refresh data automatically
+  //(the data is a 2D list, but only elements are modified NOT the WHOLE 2D List, so BLoC doesn't refresh it automatically)
+  // this setState refreshes the whole widget
+  Widget _gradientColorReloadButton() {
+    return Container(
+      width: (MediaQuery.of(context).size.width - 132) / 5,
+      height: 50,
+      child: MaterialButton(
+        color: Color(0xff00a35a),
+        onPressed: () {
+          setState(() {
+            print('widget reload');
+          });
+        },
+        child: Icon(
+          Icons.replay,
+          size: 22,
+          color: Colors.white,
+        ),
+      ),
     );
   }
 }
