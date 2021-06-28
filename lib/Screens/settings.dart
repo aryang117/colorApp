@@ -1,6 +1,7 @@
+import 'package:flutter/material.dart';
+
 import 'package:colorApp/Widgets/Settings/settingsDarkThemeSwitch.dart';
 import 'package:colorApp/Widgets/Settings/settingsDropDownFontSwitcher.dart';
-import 'package:flutter/material.dart';
 
 class Settings extends StatelessWidget {
   const Settings({Key key}) : super(key: key);

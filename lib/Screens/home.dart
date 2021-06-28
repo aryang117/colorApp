@@ -1,7 +1,8 @@
+import 'package:flutter/material.dart';
+
 import 'package:colorApp/Screens/gradient.dart';
 import 'package:colorApp/Screens/settings.dart';
 import 'package:colorApp/Screens/solidColor.dart';
-import 'package:flutter/material.dart';
 
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 

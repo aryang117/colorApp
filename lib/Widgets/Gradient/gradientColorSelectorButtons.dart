@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:colorApp/Screens/gradient.dart';
 
 // the buttons below the gradient display to switch colors and display their respective hex values

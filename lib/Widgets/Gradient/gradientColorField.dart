@@ -1,7 +1,7 @@
-import 'package:colorApp/Screens/gradient.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
+import 'package:colorApp/Screens/gradient.dart';
 
 // the textfield at the bottom that display the color's hex values
 class ColorField extends StatelessWidget {

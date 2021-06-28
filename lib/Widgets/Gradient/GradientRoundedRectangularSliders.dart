@@ -1,7 +1,9 @@
-import 'package:colorApp/Models/GradientModel.dart';
+import 'package:flutter/material.dart';
+
 import 'package:colorApp/Screens/gradient.dart';
 import 'package:colorApp/Widgets/RoundedRectangularThumb.dart';
-import 'package:flutter/material.dart';
+
+import 'package:colorApp/Models/GradientModel.dart';
 import 'package:colorApp/Logic/GradientBloc.dart';
 
 // the sliders are custom and this is their definition

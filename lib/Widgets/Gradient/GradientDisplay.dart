@@ -1,5 +1,6 @@
-import 'package:colorApp/Models/GradientModel.dart';
 import 'package:flutter/material.dart';
+
+import 'package:colorApp/Models/GradientModel.dart';
 
 //This displays the Color that the users chooses by adjusting the sliders
 class GradientDisplay extends StatefulWidget {
