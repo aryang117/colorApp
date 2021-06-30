@@ -1,5 +1,5 @@
 # ColorApp
-A Flutter application that lets the you create beautiful solid and gradient colors on the fly. 
+A Flutter application that lets you create beautiful solid and gradient colors on the fly. 
 
 Using this app you can create -
 - Beautiful Solid Colors.
