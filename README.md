@@ -1,6 +1,16 @@
 # ColorApp
-A Flutter application that lets you create beautiful solid and gradient colors on the fly. 
 
+## Table of Contents
+* [Overview](#overview)
+* [Building the Project](#building-the-project)
+* [Preview](#preview-gifs-and-screenshots)
+* [Modules](#modules)
+* [What did I learn](#what-did-i-learn)
+
+## Overview
+The intention with this app was to let the user create pretty Colors just by moving a few sliders. Whether you want to create beautiful solid colors or awesome 4 color gradients, this app has it all (including the ability to copy them to the clipboard). Not only this, you have (light and dark) theme support for folks who like dark theme or prefer the traditional light one. In addition to themes, this app also has different font support. And on top of all this, this app supports saving of your preferences.
+
+### Goals
 Using this app you can create -
 - Beautiful Solid Colors.
 - Amazing Gradients with upto 4 different colors.
