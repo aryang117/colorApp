@@ -5,11 +5,6 @@ import '/Models/SolidColorMdel.dart';
 import 'package:provider/provider.dart';
 import '../RoundedRectangularThumb.dart';
 
-TextStyle formStyle = new TextStyle(
-  fontSize: 20,
-  color: Colors.white,
-);
-
 //FOR SOLID COLOR
 //the sliders that adjust the RGB values of the color
 class SolidColorSliders extends StatefulWidget {
