@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:colorApp/Screens/solidColor.dart';
+import '/Models/SolidColorMdel.dart';
+
+import 'package:provider/provider.dart';
 
 class SolidColorTextField extends StatefulWidget {
-  const SolidColorTextField(
-      {Key key, @required this.red, @required this.blue, @required this.green})
-      : super(key: key);
-
-  final int red;
-  final int green;
-  final int blue;
+  const SolidColorTextField({Key key}) : super(key: key);
 
   @override
   _SolidColorTextFieldState createState() => _SolidColorTextFieldState();
@@ -19,6 +15,8 @@ class SolidColorTextField extends StatefulWidget {
 class _SolidColorTextFieldState extends State<SolidColorTextField> {
   @override
   Widget build(BuildContext context) {
+    SolidColorsModel colorProvider = Provider.of<SolidColorsModel>(context);
+
     return Container(
       padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
       child: TextField(
@@ -30,12 +28,13 @@ class _SolidColorTextFieldState extends State<SolidColorTextField> {
               borderSide: BorderSide(color: Colors.white, width: 2)),
           border:
               OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
-          prefixText: colorinHex(widget.red, widget.green, widget.blue),
+          prefixText: colorinHex(colorProvider.getRed, colorProvider.getGreen,
+              colorProvider.getBlue),
           prefixStyle: Theme.of(context).textTheme.bodyText1,
           suffixIcon: CopyToClipBoardButton(
-            red: red.value,
-            green: green.value,
-            blue: blue.value,
+            red: colorProvider.getRed,
+            green: colorProvider.getGreen,
+            blue: colorProvider.getBlue,
           ),
         ),
         keyboardType: TextInputType.number,

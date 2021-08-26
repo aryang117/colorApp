@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:colorApp/Screens/solidColor.dart';
+import '/Models/SolidColorMdel.dart';
+
+import 'package:provider/provider.dart';
 import '../RoundedRectangularThumb.dart';
 
 TextStyle formStyle = new TextStyle(
@@ -18,6 +20,7 @@ class SolidColorSliders extends StatefulWidget {
 class _SolidColorSlidersState extends State<SolidColorSliders> {
   @override
   Widget build(BuildContext context) {
+    SolidColorsModel colorProvider = Provider.of<SolidColorsModel>(context);
     return Padding(
       padding: EdgeInsets.only(left: 20),
       child: Column(
@@ -27,21 +30,21 @@ class _SolidColorSlidersState extends State<SolidColorSliders> {
             inactiveTrackColor: Colors.red[200],
             activeTrackColor: Colors.red[700],
             thumbColor: Colors.redAccent,
-            value: red.value.toDouble(),
+            value: colorProvider.getRed.toDouble(),
           ),
           RoundedRectangularSliderSolidColor(
             prefixText: 'G',
             inactiveTrackColor: Colors.green[200],
             activeTrackColor: Colors.green[700],
             thumbColor: Colors.greenAccent[700],
-            value: green.value.toDouble(),
+            value: colorProvider.getGreen.toDouble(),
           ),
           RoundedRectangularSliderSolidColor(
             prefixText: 'B',
             inactiveTrackColor: Colors.blue[200],
             activeTrackColor: Colors.blue[700],
             thumbColor: Colors.blueAccent,
-            value: blue.value.toDouble(),
+            value: colorProvider.getBlue.toDouble(),
           ),
         ],
       ),
@@ -117,23 +120,29 @@ class _RoundedRectangularSliderSolidColorState
           divisions: 255,
           onChanged: (double value) {
             setState(() {
+              SolidColorsModel colorProvider =
+                  Provider.of<SolidColorsModel>(context, listen: false);
+
               switch (this.widget.prefixText) {
                 case 'R':
                   {
-                    red.value = value.toInt();
-                    print("red: " + red.value.toString());
+                    colorProvider.updateRed(value.toInt());
+                    //red.value = value.toInt();
+                    //print("red: " + red.value.toString());
                   }
                   break;
                 case 'G':
                   {
-                    green.value = value.toInt();
-                    print("green: " + green.value.toString());
+                    colorProvider.updateGreen(value.toInt());
+                    // green.value = value.toInt();
+                    // print("green: " + green.value.toString());
                   }
                   break;
                 case 'B':
                   {
-                    blue.value = value.toInt();
-                    print("blue: " + blue.value.toString());
+                    colorProvider.updateBlue(value.toInt());
+                    // blue.value = value.toInt();
+                    // print("blue: " + blue.value.toString());
                   }
                   break;
                 default:

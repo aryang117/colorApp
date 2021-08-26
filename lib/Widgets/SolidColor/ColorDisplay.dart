@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 
+import '/Models/SolidColorMdel.dart';
+
+import 'package:provider/provider.dart';
+
 //This displays the Color that the users chooses by adjusting the sliders
 class ColorDisplay extends StatelessWidget {
-  const ColorDisplay(
-      {Key key, @required this.red, @required this.green, @required this.blue})
-      : super(key: key);
-
-  final int red;
-  final int green;
-  final int blue;
+  const ColorDisplay({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    int red = Provider.of<SolidColorsModel>(context).getRed;
+    int green = Provider.of<SolidColorsModel>(context).getGreen;
+    int blue = Provider.of<SolidColorsModel>(context).getBlue;
+
     double screenHeight = MediaQuery.of(context).size.height;
     return Padding(
       padding: new EdgeInsets.fromLTRB(10, 10, 10, 0),
