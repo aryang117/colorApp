@@ -54,11 +54,9 @@ class _MyAppState extends State<MyApp> {
   Future _loadInitialValues() async {
     final sharedPreferences = await SharedPreferences.getInstance();
 
-    setState(() {
-      _fontData = sharedPreferences.getString('font');
-      _isDarkTheme = sharedPreferences.getBool('isDarkTheme');
-      print(_isDarkTheme.toString() + _fontData);
-    });
+    _fontData = sharedPreferences.getString('font');
+    _isDarkTheme = sharedPreferences.getBool('isDarkTheme');
+    print(_isDarkTheme.toString() + _fontData);
   }
 
   @override

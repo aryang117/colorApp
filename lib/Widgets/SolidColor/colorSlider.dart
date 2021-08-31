@@ -7,12 +7,7 @@ import '../RoundedRectangularThumb.dart';
 
 //FOR SOLID COLOR
 //the sliders that adjust the RGB values of the color
-class SolidColorSliders extends StatefulWidget {
-  @override
-  _SolidColorSlidersState createState() => _SolidColorSlidersState();
-}
-
-class _SolidColorSlidersState extends State<SolidColorSliders> {
+class SolidColorSliders extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SolidColorsModel colorProvider = Provider.of<SolidColorsModel>(context);
@@ -48,7 +43,7 @@ class _SolidColorSlidersState extends State<SolidColorSliders> {
 }
 
 // the sliders are custom and this is their definition
-class RoundedRectangularSliderSolidColor extends StatefulWidget {
+class RoundedRectangularSliderSolidColor extends StatelessWidget {
   const RoundedRectangularSliderSolidColor(
       {Key key,
       this.prefixText,
@@ -64,20 +59,12 @@ class RoundedRectangularSliderSolidColor extends StatefulWidget {
   final String prefixText;
   final double value;
 
-  @override
-  _RoundedRectangularSliderSolidColorState createState() =>
-      _RoundedRectangularSliderSolidColorState();
-}
-
-class _RoundedRectangularSliderSolidColorState
-    extends State<RoundedRectangularSliderSolidColor> {
   double rgbValue() {
-    if (this.widget.prefixText.toUpperCase() == 'R')
-      return widget.value;
-    else if (this.widget.prefixText.toUpperCase() == 'G')
-      return this.widget.value;
-    else if (this.widget.prefixText.toUpperCase() == 'B')
-      return this.widget.value;
+    if (this.prefixText.toUpperCase() == 'R')
+      return value;
+    else if (this.prefixText.toUpperCase() == 'G')
+      return this.value;
+    else if (this.prefixText.toUpperCase() == 'B') return this.value;
 
     return 0;
   }
@@ -86,8 +73,8 @@ class _RoundedRectangularSliderSolidColorState
   Widget build(BuildContext context) {
     return SliderTheme(
       data: SliderTheme.of(context).copyWith(
-        activeTrackColor: this.widget.activeTrackColor,
-        inactiveTrackColor: this.widget.inactiveTrackColor,
+        activeTrackColor: this.activeTrackColor,
+        inactiveTrackColor: this.inactiveTrackColor,
         trackShape: RectangularSliderTrackShape(),
         trackHeight: 4.0,
         thumbShape: SliderRoundedRectangularThumb(
@@ -95,10 +82,10 @@ class _RoundedRectangularSliderSolidColorState
             thumbRadius: 2,
             min: 0,
             max: 255,
-            prefixText: this.widget.prefixText,
+            prefixText: this.prefixText,
             thumbTextStyle: Theme.of(context).textTheme.bodyText2),
-        thumbColor: this.widget.thumbColor,
-        overlayColor: this.widget.activeTrackColor.withAlpha(32),
+        thumbColor: this.thumbColor,
+        overlayColor: this.activeTrackColor.withAlpha(32),
         overlayShape: RoundSliderOverlayShape(overlayRadius: 28.0),
         showValueIndicator: ShowValueIndicator.never,
         valueIndicatorShape: PaddleSliderValueIndicatorShape(),
@@ -114,35 +101,33 @@ class _RoundedRectangularSliderSolidColorState
           max: 255,
           divisions: 255,
           onChanged: (double value) {
-            setState(() {
-              SolidColorsModel colorProvider =
-                  Provider.of<SolidColorsModel>(context, listen: false);
+            SolidColorsModel colorProvider =
+                Provider.of<SolidColorsModel>(context, listen: false);
 
-              switch (this.widget.prefixText) {
-                case 'R':
-                  {
-                    colorProvider.updateRed(value.toInt());
-                    //red.value = value.toInt();
-                    //print("red: " + red.value.toString());
-                  }
-                  break;
-                case 'G':
-                  {
-                    colorProvider.updateGreen(value.toInt());
-                    // green.value = value.toInt();
-                    // print("green: " + green.value.toString());
-                  }
-                  break;
-                case 'B':
-                  {
-                    colorProvider.updateBlue(value.toInt());
-                    // blue.value = value.toInt();
-                    // print("blue: " + blue.value.toString());
-                  }
-                  break;
-                default:
-              }
-            });
+            switch (this.prefixText) {
+              case 'R':
+                {
+                  colorProvider.updateRed(value.toInt());
+                  //red.value = value.toInt();
+                  //print("red: " + red.value.toString());
+                }
+                break;
+              case 'G':
+                {
+                  colorProvider.updateGreen(value.toInt());
+                  // green.value = value.toInt();
+                  // print("green: " + green.value.toString());
+                }
+                break;
+              case 'B':
+                {
+                  colorProvider.updateBlue(value.toInt());
+                  // blue.value = value.toInt();
+                  // print("blue: " + blue.value.toString());
+                }
+                break;
+              default:
+            }
           }),
     );
   }

@@ -10,9 +10,9 @@ class ColorDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int red = Provider.of<SolidColorsModel>(context).getRed;
-    int green = Provider.of<SolidColorsModel>(context).getGreen;
-    int blue = Provider.of<SolidColorsModel>(context).getBlue;
+    int red = Provider.of<SolidColorsModel>(context, listen: false).getRed;
+    int green = Provider.of<SolidColorsModel>(context, listen: false).getGreen;
+    int blue = Provider.of<SolidColorsModel>(context, listen: false).getBlue;
 
     double screenHeight = MediaQuery.of(context).size.height;
     return Padding(

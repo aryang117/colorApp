@@ -14,6 +14,7 @@ class SolidColor extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
+      lazy: true,
       create: (_) => SolidColorsModel(),
       child: Scaffold(
         backgroundColor: Theme.of(context).backgroundColor,

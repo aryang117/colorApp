@@ -5,14 +5,9 @@ import '/Models/SolidColorMdel.dart';
 
 import 'package:provider/provider.dart';
 
-class SolidColorTextField extends StatefulWidget {
+class SolidColorTextField extends StatelessWidget {
   const SolidColorTextField({Key key}) : super(key: key);
 
-  @override
-  _SolidColorTextFieldState createState() => _SolidColorTextFieldState();
-}
-
-class _SolidColorTextFieldState extends State<SolidColorTextField> {
   @override
   Widget build(BuildContext context) {
     SolidColorsModel colorProvider = Provider.of<SolidColorsModel>(context);
